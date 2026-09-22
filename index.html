@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="奶蛙矿工——小奶蛙是小黄金，大奶蛙是最大黄金，抓到它还会捧腹大笑！">
-<title>奶蛙矿工</title>
+<meta name="description" content="奶蛙工厂——od厂长的邪恶罐头工厂，蛋蛋帮他抓遍天下奶蛙！">
+<title>奶蛙工厂</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='34' r='26' fill='%23ffd93d'/><circle cx='22' cy='30' r='6' fill='%23222'/><circle cx='42' cy='30' r='6' fill='%23222'/><circle cx='22' cy='30' r='2.4' fill='%23fff'/><circle cx='42' cy='30' r='2.4' fill='%23fff'/><path d='M20 46 Q32 56 44 46' stroke='%23a9742f' stroke-width='4' fill='none' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=ZCOOL+KuaiLe&display=swap">
 <style>
-:root{--gold:#ffd75e;--gold2:#f5a623;--soil:#7a4a21;--soil2:#5c3618;--wood:#6b4226;--brown:#3a2410;--green:#58a84f;--cream:#fdf6e3;}
+:root{--gold:#ffd75e;--gold2:#f5a623;--soil:#7a4a21;--soil2:#5c3618;--wood:#6b4226;--brown:#3a2410;--green:#58a84f;--cream:#fdf6e3;--evil:#d94b3a;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
-body{background:linear-gradient(180deg,#2e1c0d 0%,#4a2c12 55%,#2e1c0d 100%);font-family:'ZCOOL KuaiLe','Microsoft YaHei','PingFang SC',sans-serif;color:var(--cream);display:flex;align-items:center;justify-content:center;padding:12px;min-height:100vh;}
+body{background:linear-gradient(180deg,#1a0f08 0%,#3a2010 55%,#1a0f08 100%);font-family:'ZCOOL KuaiLe','Microsoft YaHei','PingFang SC',sans-serif;color:var(--cream);display:flex;align-items:center;justify-content:center;padding:12px;min-height:100vh;}
 .page{width:100%;max-width:860px;}
 .hud{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;background:linear-gradient(180deg,#8a5a2b,#6b3f18);border:4px solid var(--brown);border-bottom:none;border-radius:14px 14px 0 0;padding:8px 14px;box-shadow:inset 0 2px 0 rgba(255,215,94,.22);}
 .hgroup{display:flex;gap:16px;}
@@ -31,6 +31,19 @@ canvas{display:block;width:100%;height:auto;border-radius:0 0 12px 12px;touch-ac
 .hidden{display:none!important;}
 .card{background:linear-gradient(180deg,#8a5a2b,#6b3f18);border:3px solid var(--brown);border-radius:18px;padding:20px 26px;text-align:center;max-width:92%;max-height:96%;overflow:auto;box-shadow:0 10px 28px rgba(0,0,0,.5);}
 h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.28);line-height:1.12;letter-spacing:2px;}
+.factoryTitle{font-size:44px;margin-bottom:6px;color:#ffe14d;text-shadow:0 4px 0 #7a4a21,0 8px 0 rgba(0,0,0,.4);letter-spacing:8px;margin-bottom:8px;}
+.factoryScreen{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 50%,#3a2410 0%,#120803 70%);z-index:5;overflow:hidden;}
+.factoryLeft{position:absolute;left:6%;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:18px;}
+.factoryOd{position:absolute;right:0;bottom:0;height:96%;z-index:1;filter:drop-shadow(0 12px 16px rgba(0,0,0,.5));}
+.frogBtn{position:relative;cursor:pointer;width:200px;height:200px;display:flex;align-items:center;justify-content:center;transition:transform .15s;filter:drop-shadow(0 0 24px rgba(255,225,77,.8)) drop-shadow(0 0 48px rgba(255,157,61,.5));}
+.frogBtn:hover{transform:scale(1.08);}
+.frogBtn img{width:100%;height:100%;object-fit:contain;animation:floatFrog 2.4s ease-in-out infinite;}
+.difficultyBar{display:flex;gap:8px;margin-top:10px;justify-content:center;}
+.diffBtn{padding:6px 16px;font-size:14px;background:#e8c878;color:#5a3818;border:2px solid #a06810;border-radius:8px;cursor:pointer;font-family:inherit;}
+.diffBtn.active{background:#ffd75e;box-shadow:0 0 12px rgba(255,215,94,.7);font-weight:bold;}
+.frogBtnLabel{position:absolute;bottom:18%;left:0;right:0;text-align:center;font-size:26px;color:#4a2c0f;letter-spacing:3px;text-shadow:0 2px 0 rgba(255,255,255,.6);font-weight:bold;pointer-events:none;}
+@keyframes floatFrog{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.factorySub{display:flex;gap:10px;margin-top:6px;}
 .frogs{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin:10px 0 6px;}
 .frogs img{width:72px;height:auto;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:bob 2.2s ease-in-out infinite;}
 .frogs img:nth-child(2){width:52px;animation-delay:.6s;}
@@ -45,17 +58,36 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .dexCell.locked .nm{color:#9c8661;}
 .rules{list-style:none;text-align:left;font-size:14px;color:#ffefc9;margin:10px auto 14px;max-width:330px;line-height:1.75;}
 .rules li::before{content:'· ';color:#ffe14d;font-weight:bold;}
-.bigbtn{font-family:inherit;font-size:22px;letter-spacing:4px;color:#4a2c0f;background:linear-gradient(180deg,#ffe14d,#f5a623);border:3px solid #7a4a21;border-radius:14px;padding:11px 38px;cursor:pointer;box-shadow:0 5px 0 #7a4a21;transition:transform .06s;}
+.bigbtn{font-family:inherit;font-size:22px;letter-spacing:4px;color:#4a2c0f;background:linear-gradient(180deg,#ffe14d,#f5a623);border:3px solid #7a4a21;border-radius:14px;padding:11px 38px;cursor:pointer;box-shadow:0 5px 0 #7a4a21;transition:transform .06s;width:100%;}
 .bigbtn:active{transform:translateY(4px);box-shadow:0 1px 0 #7a4a21;}
 .bigbtn:hover{filter:brightness(1.06);}
+.bigbtn.evil{background:linear-gradient(180deg,#ff9d8a,#d94b3a);color:#fff;border-color:#7a1a10;}
 .row{display:flex;gap:12px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
 .smallbtn{font-family:inherit;font-size:17px;color:#4a2c0f;background:linear-gradient(180deg,#ffe9a0,#f5a623);border:3px solid #7a4a21;border-radius:12px;padding:9px 22px;cursor:pointer;box-shadow:0 4px 0 #7a4a21;}
 .smallbtn:active{transform:translateY(3px);box-shadow:0 1px 0 #7a4a21;}
 .sub{font-size:14px;color:#ffe9b8;margin-top:8px;}
 .hint{text-align:center;font-size:13px;color:#cbb489;margin-top:10px;line-height:1.7;}
-kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-radius:5px;padding:1px 7px;font-family:inherit;font-size:12px;color:#ffe9b8;}
+.kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-radius:5px;padding:1px 7px;font-family:inherit;font-size:12px;color:#ffe9b8;}
+.loadingBox{text-align:center;color:#ffe14d;font-size:22px;letter-spacing:4px;}
+.loadingDot{display:inline-block;width:14px;height:14px;border-radius:50%;background:#ffe14d;margin:14px 4px 0;animation:bounce 1s infinite ease-in-out;}
+.loadingDot:nth-child(2){animation-delay:.15s}
+.loadingDot:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+.introScreen{position:absolute;inset:0;background:#1a0f08;border-radius:0 0 12px 12px;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;}
+.introScene{font-size:28px;color:#ffe14d;text-align:center;padding:20px;line-height:1.5;max-width:700px;}
+.introArrow{position:absolute;bottom:20px;right:30px;color:#ffe14d;font-size:20px;animation:blink 1s infinite;}
+.introImg{max-width:180px;max-height:160px;margin:10px auto;display:block;}
+.rareShow{position:absolute;inset:0;background:rgba(0,0,0,.85);border-radius:0 0 12px 12px;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.rareShow .rareImg{width:200px;height:200px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(255,215,94,.8));animation:rarePop .6s cubic-bezier(.2,1.6,.4,1);}
+.rareShow .rareLabel{font-size:32px;color:#ffe14d;margin-top:16px;text-shadow:0 3px 0 #7a4a21;}
+.rareShow .rareTag{font-size:16px;color:#ff9d3d;margin-top:6px;letter-spacing:4px;}
+@keyframes rarePop{0%{transform:scale(0) rotate(-10deg)}100%{transform:scale(1) rotate(0)}}
 @media(max-width:560px){
   h1{font-size:26px;}
+  .factoryTitle{font-size:30px;letter-spacing:3px;}
+  .factoryOd{height:60%;right:0;opacity:.7;}
+  .goldStart{width:200px;height:150px;}
+  .goldStart .label{font-size:24px;}
   .hud{padding:6px 10px;gap:4px 8px;}
   .stat span{font-size:11px;letter-spacing:1px;}
   .stat b{font-size:16px;}
@@ -68,19 +100,20 @@ kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-r
   .bigbtn{font-size:19px;padding:9px 26px;}
   .dexGrid{gap:8px;}
   .dexCell img{width:48px;height:48px;}
+  .introScene{font-size:22px;}
+  .rareShow .rareImg{width:140px;height:140px;}
 }
 </style>
 </head>
 <body>
 <div class="page">
-  <!-- ===== HUD ===== -->
   <div class="hud">
     <div class="hgroup">
       <div class="stat"><span>分数</span><b id="score">$0</b></div>
       <div class="stat"><span>目标</span><b id="target">$800</b></div>
     </div>
     <div style="display:flex;gap:8px;">
-      <button id="btnQuit" class="hbtn" type="button">退出关卡</button>
+      <button id="btnQuit" class="hbtn" type="button">回工厂</button>
       <button id="btnDexHud" class="hbtn" type="button">奶蛙图鉴</button>
     </div>
     <div class="hgroup">
@@ -97,32 +130,67 @@ kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-r
     </div>
   </div>
 
-  <!-- ===== 游戏区 ===== -->
   <div class="stage">
     <canvas id="game" width="800" height="600"></canvas>
     <img id="sheetImg" src="assets/laugh-sheet2.png" alt="" style="display:none" aria-hidden="true">
+    <img id="dandanImg" src="assets/dandan-head.png" alt="" style="display:none" aria-hidden="true">
+    <img id="odImg" src="assets/od-boss.png" alt="" style="display:none" aria-hidden="true">
+    <img id="diamondIcon" src="assets/diamond-icon.png" style="display:none" alt="">
+    <img id="odAngryImg" src="assets/od-angry.png" alt="" style="display:none" aria-hidden="true">
     <div style="display:none" aria-hidden="true">
       <img src="assets/frog-rare-1.png"><img src="assets/frog-rare-2.png"><img src="assets/frog-rare-3.png">
       <img src="assets/frog-rare-4.png"><img src="assets/frog-rare-5.png"><img src="assets/frog-rare-6.png">
       <img src="assets/frog-rare-7.png"><img src="assets/frog-rare-8.png"><img src="assets/frog-rare-9.png">
     </div>
     <audio id="laughAudio" src="assets/laugh-audio.mp3" preload="auto" loop></audio>
+    <audio id="bgmAudio" src="assets/bgm.mp3" preload="auto" loop></audio>
 
-    <!-- 开始菜单 -->
-    <div id="ovMenu" class="overlay">
+    <div id="ovLoading" class="overlay">
+      <div class="card">
+        <h1 style="font-size:26px;">奶蛙工厂</h1>
+        <div class="loadingBox">正在加载<span class="loadingDot"></span><span class="loadingDot"></span><span class="loadingDot"></span></div>
+      </div>
+    </div>
+
+    <div id="ovFactory" class="factoryScreen hidden">
+      <img class="factoryOd" src="assets/od-menu.png" alt="od厂长">
+            <div class="factoryLeft">
+        <h1 class="factoryTitle">奶蛙工厂</h1>
+        <div id="btnPlay" class="frogBtn" role="button" tabindex="0">
+          <img src="assets/frog-small.png" alt="开始游戏">
+          <span class="frogBtnLabel">开始游戏</span>
+        </div>
+        <div class="factorySub">
+          <button id="btnIntro" class="smallbtn" type="button">游戏背景</button>
+          <button id="btnDex" class="smallbtn" type="button">奶蛙图鉴</button>
+        </div>
+        <div class="difficultyBar">
+          <button class="diffBtn active" data-diff="easy" type="button">简单</button>
+          <button class="diffBtn" data-diff="medium" type="button">中等</button>
+          <button class="diffBtn" data-diff="hard" type="button">困难</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ovIntro" class="introScreen hidden">
+      <div id="introContent"></div>
+      <div class="introArrow">点击继续 ▶</div>
+    </div>
+
+    <div id="ovMenu" class="overlay hidden">
       <div class="card">
         <h1>奶蛙矿工</h1>
         <div class="frogs"><img src="assets/frog-big.png" alt="大奶蛙"><img src="assets/frog-small.png" alt="小奶蛙"></div>
         <ul class="rules">
+          <li>你是蛋蛋，od厂长的手下，负责抓奶蛙</li>
           <li>每关有一只稀有小奶蛙，抓到可解锁图鉴</li>
+          <li>连续空钩会惹od厂长生气</li>
           <li>空格 / 鼠标 / 手指点按 = 放钩，再按一次 = 提前收钩</li>
         </ul>
         <button id="btnStart" class="bigbtn" type="button">开始挖矿</button>
-        <div class="row"><button id="btnDex" class="smallbtn" type="button">奶蛙图鉴</button></div>
       </div>
     </div>
 
-    <!-- 暂停 -->
     <div id="ovPause" class="overlay hidden">
       <div class="card">
         <h1 style="font-size:28px;">暂停中</h1>
@@ -130,36 +198,39 @@ kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-r
       </div>
     </div>
 
-    <!-- 过关 -->
     <div id="ovClear" class="overlay hidden">
       <div class="card">
-        <h1 style="font-size:30px;">过关啦！</h1>
+        <h1 style="font-size:30px;">厂长满意！</h1>
         <p class="sub" id="clearText">本关累计 $0</p>
         <div class="row"><button id="btnNext" class="bigbtn" type="button">下一关</button></div>
       </div>
     </div>
 
-    <!-- 失败 -->
     <div id="ovOver" class="overlay hidden">
       <div class="card">
-        <h1 style="font-size:26px;line-height:1.35;">对不起，你输给了<br>狡猾的奶蛙！</h1>
+        <h1 style="font-size:26px;line-height:1.35;">厂长大发雷霆！<br>你输给了狡猾的奶蛙！</h1>
         <div class="laughBox"></div>
-        <p class="sub" id="overText">还差 $0 没挖够</p>
+        <p class="sub" id="overText">还差 $0 没抓够</p>
         <div class="row">
           <button id="btnRetry" class="smallbtn" type="button">再试一次</button>
-          <button id="btnMenu" class="smallbtn" type="button">返回菜单</button>
+          <button id="btnMenu" class="smallbtn" type="button">回工厂</button>
         </div>
       </div>
     </div>
 
-    <!-- 图鉴 -->
     <div id="ovDex" class="overlay hidden">
       <div class="card" style="max-width:520px;">
         <h1 style="font-size:26px;">奶蛙图鉴</h1>
         <p class="sub" id="dexCount">已收集 0 / 11</p>
         <div class="dexGrid" id="dexGrid"></div>
-        <div class="row"><button id="btnDexClose" class="smallbtn" type="button">返回菜单</button></div>
+        <div class="row"><button id="btnDexClose" class="smallbtn" type="button">返回</button></div>
       </div>
+    </div>
+
+    <div id="ovRareShow" class="rareShow hidden">
+      <img class="rareImg" id="rareShowImg" src="" alt="">
+      <div class="rareLabel" id="rareShowLabel"></div>
+      <div class="rareTag">稀 有 发 现</div>
     </div>
   </div>
 
@@ -168,16 +239,15 @@ kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-r
 
 <script>
 'use strict';
-/* ================= 基础配置 ================= */
 var W = 800, H = 600;
 var SOIL_TOP = 152;
 var PIVOT = { x: 400, y: 128 };
 var MINLEN = 54, MAXLEN = 470;
-var MAXA = 1.05, FREQ = 0.5;          // 摆角(弧度) 与 摆动频率(更快=更难瞄准)
+var MAXA = 1.05, FREQ = 0.5;
 var DROP_SPEED = 330, RETRACT_EMPTY = 420;
-var SPEED = { small: 250, tiny: 285, big: 80, diamond: 330, rock: 90, rare: 260 };
+var SPEED = { small: 250, tiny: 285, big: 70, diamond: 330, rock: 90, rare: 260 };
 var FONT = "'ZCOOL KuaiLe','Microsoft YaHei','PingFang SC',sans-serif";
-var SHEET_W = 216, SHEET_H = 288, SHEET_N = 20;
+var SHEET_W = 144, SHEET_H = 192, SHEET_N = 20;
 
 var canvas = document.getElementById('game');
 var ctx = canvas.getContext('2d');
@@ -185,8 +255,20 @@ var dpr = Math.min(window.devicePixelRatio || 1, 2);
 canvas.width = W * dpr; canvas.height = H * dpr;
 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-/* ================= 素材 ================= */
-function loadImg(src){ var im = new Image(); im.src = src; return im; }
+var loadCount = 0, loadNeeded = 12;
+function tickLoad(){
+  loadCount++;
+  if(loadCount >= loadNeeded){
+    hide('ovLoading');
+    show('ovFactory');
+  }
+}
+// 800ms 兜底：防止图片加载卡住一直转圈
+setTimeout(function(){
+  hide('ovLoading');
+  show('ovFactory');
+}, 800);
+function loadImg(src){ var im = new Image(); im.onload = tickLoad; im.onerror = tickLoad; im.src = src; return im; }
 var RARE = [
   { id:1, name:'呐喊蛙',   img:'assets/frog-rare-1.png', value:600 },
   { id:2, name:'洛丽塔蛙', img:'assets/frog-rare-2.png', value:650 },
@@ -198,20 +280,34 @@ var RARE = [
   { id:8, name:'花束蛙',   img:'assets/frog-rare-8.png', value:650 },
   { id:9, name:'生气蛙',   img:'assets/frog-rare-9.png', value:550 }
 ];
-var IMG = { big: loadImg('assets/frog-big.png'), small: loadImg('assets/frog-small.png'), sheet: document.getElementById('sheetImg'), rare:{} };
+var IMG = {
+  big: loadImg('assets/frog-big.png'),
+  small: loadImg('assets/frog-small.png'),
+  sheet: document.getElementById('sheetImg'),
+  dandan: document.getElementById('dandanImg'),
+  od: document.getElementById('odImg'),
+  angry: document.getElementById('odAngryImg'),
+  diamond: loadImg('assets/diamond-small.png'),
+  rare:{}
+};
+IMG.sheet.onload = tickLoad; IMG.sheet.onerror = tickLoad;
+IMG.dandan.onload = tickLoad; IMG.dandan.onerror = tickLoad;
+IMG.od.onload = tickLoad; IMG.od.onerror = tickLoad;
+if(IMG.sheet.complete && IMG.sheet.naturalWidth > 0) tickLoad();
+if(IMG.dandan.complete && IMG.dandan.naturalWidth > 0) tickLoad();
+if(IMG.od.complete && IMG.od.naturalWidth > 0) tickLoad();
 RARE.forEach(function(r){ IMG.rare[r.id] = loadImg(r.img); });
 try { document.fonts.load('16px "ZCOOL KuaiLe"'); } catch(e){}
 
-/* ================= 图鉴(localStorage) ================= */
 function loadDex(){ try{ return JSON.parse(localStorage.getItem('frogDex') || '[]'); }catch(e){ return []; } }
 function saveDex(a){ try{ localStorage.setItem('frogDex', JSON.stringify(a)); }catch(e){} }
 
-/* ================= 音效 ================= */
 var SND = {
   ctx: null, muted: false,
   ac: function(){
     if(!this.ctx){ try { this.ctx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
     if(this.ctx && this.ctx.state === 'suspended'){ this.ctx.resume(); }
+    try{ startBgm(); }catch(e){}
     return this.ctx;
   },
   tone: function(f, dur, type, vol, delay, slide){
@@ -243,17 +339,46 @@ var SND = {
   },
   drop: function(){ this.noise(0.18, 0.07, 1100); this.tone(330, 0.22, 'sawtooth', 0.05, 0, -200); },
   grab: function(){ this.tone(620, 0.07, 'square', 0.1); this.tone(900, 0.1, 'square', 0.1, 0.06); },
-  diamond: function(){ this.tone(1180, 0.09, 'sine', 0.1); this.tone(1570, 0.15, 'sine', 0.08, 0.06); },
+  diamond: function(){ this.tone(1180, 0.09, 'sine', 0.1); this.tone(1570, 0.15, 'sine', 0.08, 0.06); this.tone(2093, 0.2, 'sine', 0.06, 0.12); },
   rock: function(){ this.noise(0.3, 0.28, 160); this.tone(85, 0.26, 'sine', 0.18); },
-  laugh: function(){ for(var i = 0; i < 5; i++){ this.tone(520 - i * 35, 0.13, 'square', 0.11, i * 0.17); this.tone(400 - i * 25, 0.13, 'square', 0.09, i * 0.17 + 0.08); } },
   coin: function(){ this.tone(880, 0.08, 'square', 0.09); this.tone(1318, 0.17, 'square', 0.09, 0.07); },
   fanfare: function(){ [523, 659, 784, 1046].forEach(function(f, i){ SND.tone(f, 0.16, 'triangle', 0.12, i * 0.14); }); },
-  fail: function(){ [392, 330, 262].forEach(function(f, i){ SND.tone(f, 0.2, 'triangle', 0.12, i * 0.16); }); }
+  fail: function(){ [392, 330, 262].forEach(function(f, i){ SND.tone(f, 0.2, 'triangle', 0.12, i * 0.16); }); },
+  applause: function(){
+    for(var i = 0; i < 12; i++){ this.noise(0.08, 0.15, 2000 + Math.random() * 2000, Math.random() * 0.8); }
+    for(var j = 0; j < 6; j++){ this.tone(600 + j * 80, 0.15, 'triangle', 0.08, 0.1 + j * 0.08, 200); }
+  },
+  cheer: function(){
+    // 多人"耶——"欢呼声
+    for(var k = 0; k < 8; k++){
+      var base = 500 + Math.random() * 300;
+      this.tone(base, 0.35, 'sawtooth', 0.06, Math.random() * 0.6, 200 + Math.random() * 150);
+    }
+    // 拉长欢呼
+    this.tone(700, 0.6, 'triangle', 0.1, 0.1, 350);
+    this.tone(900, 0.6, 'triangle', 0.08, 0.2, 400);
+  },
+  explosion: function(){ this.noise(1.2, 0.45, 90); this.tone(50, 0.9, 'sine', 0.35, 0, -30); this.noise(0.4, 0.2, 3000, 0.1); }
+  , click: function(){ this.tone(1200, 0.06, 'square', 0.08); this.tone(1800, 0.05, 'square', 0.05, 0.04); }
 };
 
-/* 大奶蛙全程大笑音频 */
 var laughAudio = document.getElementById('laughAudio');
+var bgmAudio = document.getElementById('bgmAudio');
 var laughAudioOn = false;
+var bgmStarted = false;
+function startBgm(){
+  if(bgmStarted) return;
+  try{
+    bgmAudio.muted = SND.muted;
+    bgmAudio.volume = 0.25;
+    var p = bgmAudio.play();
+    if(p && p.then){
+      p.then(function(){ bgmStarted = true; }).catch(function(){ bgmStarted = false; });
+    } else {
+      bgmStarted = true;
+    }
+  }catch(e){ bgmStarted = false; }
+}
 function playLaugh(){
   laughAudioOn = true;
   try{
@@ -268,15 +393,23 @@ function stopLaugh(){
   try{ laughAudio.pause(); laughAudio.currentTime = 0; }catch(e){}
 }
 
-/* ================= 游戏状态 ================= */
 var G = {
-  state: 'menu',            // menu | play | clear | over | paused
+  scene: 'factory',
+  state: 'menu',
   level: 1, score: 0, levelBase: 0, target: 800,
   time: 45, timeMax: 45,
   items: [], fx: [], parts: [], laughs: [],
   shake: 0, laughClock: 0,
   claw: { angle: 0, len: MINLEN, st: 'swing', phase: Math.random() * 6.28, item: null },
-  deco: []
+  deco: [],
+  planeX: 100, planeDir: 1, planeY: 60,
+  odAngry: 0,
+  missCount: 0,
+  dandanX: 375, dandanY: 114,
+  dandanFaceDead: false,
+  bomb: null,
+  angryState: null, dandanJump: 0, // {timer, quote, bullet:{x,y,vx,vy,hit}}
+  rareShowTimer: 0, difficulty: 'easy', pivotT: 0
 };
 
 var ITEMCFG = {
@@ -289,7 +422,6 @@ var ITEMCFG = {
 
 function rand(a, b){ return a + Math.random() * (b - a); }
 
-/* ================= 关卡生成 ================= */
 function genDeco(){
   G.deco = [];
   for(var i = 0; i < 30; i++){
@@ -304,16 +436,21 @@ function genDeco(){
 
 function genLevel(n){
   G.items = []; genDeco();
-  var smalls = 2 + Math.min(n, 6);
-  var bigs   = Math.min(1 + Math.ceil(n / 2), 5);
-  var diamonds = n >= 2 ? 2 : 1;
-  var rocks  = 2 + Math.ceil(n / 1.5);
-  placeType('small', smalls);
+  placeType('small', 2 + Math.min(n, 6));
   placeType('tiny', n >= 4 ? 2 : 1);
-  placeType('big', bigs);
-  placeType('diamond', diamonds);
-  placeType('rock', rocks);
-  // 稀有款：每关随机出现 1 只，优先未收集的
+  placeType('big', Math.min(1 + Math.ceil(n / 2), 5));
+  // 中等/困难：大奶蛙抱钻石左右跑
+  if(G.difficulty !== 'easy'){
+    G.items.forEach(function(it){
+      if(it.type === 'big'){
+        it.wander = { dir: Math.random() < 0.5 ? 1 : -1, range: 80, cx: it.x, speed: rand(30, 85) };
+        it.holdsDiamond = true;
+        it.value += 400; // 抱钻石加分
+      }
+    });
+  }
+  placeType('diamond', n >= 2 ? 2 : 1);
+  placeType('rock', 2 + Math.ceil(n / 1.5));
   var dex = loadDex();
   var ungot = RARE.filter(function(r){ return dex.indexOf(r.id) < 0; });
   var chosen = ungot.length ? ungot[Math.floor(Math.random() * ungot.length)] : RARE[Math.floor(Math.random() * RARE.length)];
@@ -340,6 +477,7 @@ function genLevel(n){
   G.items.forEach(function(it){ total += it.value; });
   G.target = Math.max(500, Math.round(total * 0.62 / 50) * 50);
   G.time = G.timeMax = 45;
+  G.missCount = 0;
   updateHUD();
 }
 
@@ -349,7 +487,7 @@ function placeType(type, count){
       var a;
       if(type === 'diamond'){
         var side = Math.random() < 0.5 ? -1 : 1;
-        a = side * rand(0.62, 0.98) * MAXA;   // 钻石固定在最偏的角落
+        a = side * rand(0.62, 0.98) * MAXA;
       } else {
         a = rand(-0.95, 0.95) * MAXA;
       }
@@ -375,7 +513,6 @@ function placeType(type, count){
   }
 }
 
-/* ================= 特效 ================= */
 function pop(x, y, txt, size, color){
   G.fx.push({ x: x, y: y, txt: txt, size: size || 20, color: color || '#ffe14d', vy: -44, life: 1.1, max: 1.1, rot: rand(-0.12, 0.12) });
 }
@@ -388,6 +525,12 @@ function burst(x, y, n, colors, spd, grav, sz, life){
 function sparkle(x, y){ burst(x, y, 22, ['#ffe14d', '#ffd75e', '#fff6c9', '#f5a623'], 190, 120, 5, 0.7); }
 function confetti(x, y){ burst(x, y, 34, ['#ffe14d', '#ff9d3d', '#58a84f', '#ff6b5e', '#6ec6ff'], 230, 260, 5, 1.0); }
 function dust(x, y){ burst(x, y, 14, ['#a0835c', '#8a6b45', '#6b4f2e'], 110, 40, 6, 0.8); }
+function diamondBurst(x, y){
+  burst(x, y, 40, ['#ffffff', '#c8f0ff', '#5db4ec', '#ffe14d'], 260, 100, 4, 1.0);
+  for(var i = 0; i < 8; i++){
+    G.fx.push({ x: x, y: y, txt: '✦', size: 18 + Math.random() * 14, color: '#fff', vy: -30 - Math.random() * 40, life: 1.2, max: 1.2, rot: rand(-0.3, 0.3) });
+  }
+}
 
 function updateFx(dt){
   for(var i = G.fx.length - 1; i >= 0; i--){
@@ -404,26 +547,22 @@ function updateFx(dt){
   }
 }
 
-/* ================= 钩子逻辑 ================= */
 function tip(){
   var c = G.claw;
   return { x: PIVOT.x + Math.sin(c.angle) * c.len, y: PIVOT.y + Math.cos(c.angle) * c.len };
 }
-
 function swingOnly(dt){
   var c = G.claw;
   c.phase += dt * Math.PI * 2 * FREQ;
   c.angle = MAXA * Math.sin(c.phase);
   c.len = MINLEN;
 }
-
 function updateClaw(dt){
   var c = G.claw;
-  if(c.st === 'swing'){
-    swingOnly(dt);
-  } else if(c.st === 'drop'){
+  if(c.st === 'swing'){ swingOnly(dt); }
+  else if(c.st === 'drop'){
     c.len += DROP_SPEED * dt;
-    if(c.len >= MAXLEN){ c.st = 'retract'; c.item = null; return; }
+    if(c.len >= MAXLEN){ c.st = 'retract'; c.item = null; onMiss(); return; }
     var t = tip();
     var best = null, bestD = 1e9;
     for(var i = 0; i < G.items.length; i++){
@@ -438,8 +577,8 @@ function updateClaw(dt){
     var bigPull = !!(c.item && c.item.type === 'big');
     if(bigPull){
       var ph = (performance.now() % 800) / 800;
-      if(ph > 0.4) sp *= 0.05;                        // 拽不动，长时间停顿喘息
-      if(Math.random() < dt * 4){                     // 用力冒汗
+      if(ph > 0.4) sp *= 0.05;
+      if(Math.random() < dt * 4){
         var tp0 = tip();
         G.parts.push({ x: tp0.x + rand(-7, 7), y: tp0.y + 10, vx: rand(-15, 15), vy: rand(-90, -40), g: 280, life: 0.45, max: 0.45, size: 3, color: '#d8f6ff' });
       }
@@ -450,23 +589,55 @@ function updateClaw(dt){
   }
 }
 
+var ANGRY_QUOTES = ['没用的蛋蛋！', '蛋蛋你怎么又空钩了！', '蛋蛋你今天不许吃晚饭！'];
+function onMiss(){
+  G.missCount++;
+  G.odAngry = 1.2; // 每次空钩都冒火一下
+  if(G.missCount >= 3){
+    G.missCount = 0;
+    startAngryCutscene();
+  }
+}
+function startAngryCutscene(){
+  if(G.state !== 'play') return;
+  G.state = 'angryPause';
+  G.odAngry = 3;
+  var quote = ANGRY_QUOTES[Math.floor(Math.random() * ANGRY_QUOTES.length)];
+  G.angryState = {
+    timer: 0,
+    quote: quote,
+    bullet: { x: G.planeX, y: G.planeY + 15, vx: 0, vy: 0, hit: false }
+  };
+  SND.fail();
+  // 子弹朝蛋蛋脸飞
+  var bx = G.dandanX - G.planeX;
+  var by = (G.dandanY - 20) - (G.planeY + 15);
+  var bt = 1.0; // 1秒飞完
+  G.angryState.bullet.vx = bx / bt;
+  G.angryState.bullet.vy = by / bt;
+}
+
 function grab(it){
   var c = G.claw;
   it.grabbed = true; c.item = it; c.st = 'retract';
+  G.dandanJump = 0.5; // 高兴连跳两下
   if(it.type === 'big'){
-    G.laughClock = 0.0001;
-    G.shake = 0.5;
-    playLaugh();
+    G.laughClock = 0.0001; G.shake = 0.5; playLaugh();
     pop(it.x, it.y - 60, '好重！哈哈哈哈！', 24, '#ffe14d');
     sparkle(it.x, it.y);
   } else if(it.type === 'rock'){
     SND.rock(); dust(it.x, it.y);
     pop(it.x, it.y - 30, '好沉…', 16, '#cfc4ae');
-  } else if(it.type === 'diamond' || it.type === 'rare'){
+    G.missCount++;
+    if(G.missCount >= 3){ G.odAngry = 2.5; G.missCount = 0; pop(400, 60, '厂长生气了！', 22, '#ff6b5e'); }
+  } else if(it.type === 'diamond'){
+    SND.diamond(); diamondBurst(it.x, it.y);
+    pop(it.x, it.y - 30, '钻石！', 22, '#c8f0ff');
+  } else if(it.type === 'rare'){
     SND.diamond(); sparkle(it.x, it.y);
-    if(it.type === 'rare') pop(it.x, it.y - 46, '稀有！' + it.rareName, 19, '#ffd75e');
+    showRareShow(it);
   } else {
-    SND.grab();
+    SND.grab(); G.missCount = 0;
   }
 }
 
@@ -475,7 +646,7 @@ function deliver(){
   if(!it) return;
   if(it.type === 'rock'){
     dust(PIVOT.x, PIVOT.y + 40, 12);
-    pop(PIVOT.x, PIVOT.y - 36, '石头搬上来了，白费力气', 15, '#cfc4ae');
+    pop(PIVOT.x, PIVOT.y - 36, '石头搬上来了', 15, '#cfc4ae');
   } else {
     G.score += it.value;
     SND.coin();
@@ -483,8 +654,7 @@ function deliver(){
     if(it.type === 'big'){
       G.shake = Math.max(G.shake, 0.3);
       pop(400, 148, '好重…终于收工！', 20, '#ff9d3d');
-      confetti(400, 170);
-      stopLaugh();
+      confetti(400, 170); stopLaugh();
     }
     if(it.type === 'rare'){
       var dex = loadDex();
@@ -493,67 +663,174 @@ function deliver(){
       pop(400, 148, isNew ? '图鉴解锁：' + it.rareName : '又是' + it.rareName, 20, '#ffd75e');
       confetti(400, 170);
     }
+    if(it.type === 'diamond'){ diamondBurst(400, 170); }
     if(G.score >= G.target && G.state === 'play'){ levelClear(); return; }
   }
   it.collected = true;
+  G.dandanFaceDead = false;
   updateHUD();
 }
 
-/* ================= 流程 ================= */
+function showRareShow(it){
+  G.state = 'rareShow';
+  G.rareShowTimer = 2.2;
+  var info = RARE.find(function(r){ return r.id === it.rareId; });
+  document.getElementById('rareShowImg').src = info.img;
+  document.getElementById('rareShowLabel').textContent = it.rareName;
+  show('ovRareShow');
+  SND.applause(); SND.cheer();
+}
+function hideRareShow(){
+  hide('ovRareShow');
+  if(G.state === 'rareShow') G.state = 'play';
+}
+
+function dropBomb(){
+  var dx = G.dandanX - G.planeX;
+  var dy = (G.dandanY + 10) - (G.planeY + 20);
+  var t = Math.max(0.8, Math.sqrt(2 * dy / 600)); // 自由落体时间
+  G.bomb = { x: G.planeX, y: G.planeY + 20, vy: 0, vx: dx / t, exploded: false, tx: G.dandanX, ty: G.dandanY + 10 };
+}
+function updateBomb(dt){
+  if(!G.bomb) return;
+  if(!G.bomb.exploded){
+    G.bomb.vy += 600 * dt;
+    G.bomb.y += G.bomb.vy * dt;
+    G.bomb.x += G.bomb.vx * dt;
+    // 拖尾
+    G.parts.push({ x: G.bomb.x, y: G.bomb.y, vx: 0, vy: 0, g: 0, life: 0.3, max: 0.3, size: 3, color: '#666' });
+    if(G.bomb.y >= G.bomb.ty){
+      G.bomb.exploded = true;
+      G.shake = 1.2;
+      G.dandanFaceDead = true;
+      SND.explosion();
+      burst(G.dandanX, G.dandanY, 60, ['#ff6b3a', '#ffd75e', '#333', '#666', '#999', '#fff'], 320, 220, 7, 1.8);
+      // 火球
+      for(var fi = 0; fi < 5; fi++){
+        G.fx.push({ x: G.dandanX + (Math.random()-0.5)*40, y: G.dandanY + (Math.random()-0.5)*20,
+          txt: ['🔥','●','✦'][fi % 3], size: 28 + Math.random()*18, color: fi%2 ? '#ff9d3d' : '#ffe14d',
+          vy: -20 - Math.random()*30, life: 1.4, max: 1.4, rot: rand(-0.2,0.2) });
+      }
+      pop(G.dandanX, G.dandanY - 50, '轰——！', 38, '#ff9d3d');
+      setTimeout(function(){ G.bomb = null; }, 1500);
+    }
+  }
+}
+function updateWander(dt){
+  if(G.state !== 'play') return;
+  G.items.forEach(function(it){
+    if(it.wander && !it.grabbed){
+      it.x += it.wander.dir * it.wander.speed * dt;
+      if(it.x > it.wander.cx + it.wander.range){ it.wander.dir = -1; }
+      if(it.x < it.wander.cx - it.wander.range){ it.wander.dir = 1; }
+    }
+  });
+}
+function updatePivot(dt){
+  if(G.difficulty !== 'hard' || G.state !== 'play') return;
+  G.pivotT += dt * 0.6;
+  PIVOT.x = 400 + Math.sin(G.pivotT) * 80;
+  G.dandanX = PIVOT.x - 25;
+}
+function updateAngry(dt){
+  if(!G.angryState) return;
+  var a = G.angryState;
+  a.timer += dt;
+  // 子弹飞
+  if(!a.bullet.hit){
+    a.bullet.x += a.bullet.vx * dt;
+    a.bullet.y += a.bullet.vy * dt;
+    var dx = a.bullet.x - G.dandanX;
+    var dy = a.bullet.y - (G.dandanY - 20);
+    if(Math.hypot(dx, dy) < 12){
+      a.bullet.hit = true;
+      G.dandanFaceDead = true;
+      G.shake = 0.6;
+      SND.explosion();
+      burst(G.dandanX, G.dandanY - 20, 24, ['#ff6b3a', '#333', '#666', '#999'], 220, 180, 5, 1.0);
+      // 1.2 秒后脸自动恢复
+      setTimeout(function(){ G.dandanFaceDead = false; }, 1200);
+    }
+  }
+  // 3秒后结束
+  if(a.timer >= 3.0){
+    G.angryState = null;
+    G.state = 'play';
+    // 脸黑保留到下次抓到东西
+  }
+}
+
 function startGame(){
-  G.state = 'play'; G.level = 1; G.score = 0; G.levelBase = 0;
+  G.scene = 'play'; G.state = 'menu'; G.level = 1; G.score = 0; G.levelBase = 0;
+  G.dandanDead = false; G.dandanFaceDead = false; G.bomb = null; G.angryState = null; G.odAngry = 0;
   genLevel(1); resetClaw();
-  hide('ovMenu'); hide('ovClear'); hide('ovOver'); hide('ovPause');
+  hide('ovFactory');
+  show('ovMenu');
+}
+function enterMiner(){
+  hide('ovMenu');
+  G.state = 'play';
+  genLevel(1); resetClaw();
 }
 function nextLevel(){
+  SND.ac(); SND.click();
   G.level++; G.score = 0; G.levelBase = 0;
   genLevel(G.level); resetClaw();
   G.state = 'play';
   hide('ovClear');
 }
 function retryLevel(){
-  G.score = 0;
-  stopLaugh();
+  SND.ac(); SND.click();
+  G.score = 0; stopLaugh();
+  G.dandanDead = false; G.dandanFaceDead = false; G.bomb = null; G.angryState = null;
   genLevel(G.level); resetClaw();
   G.state = 'play';
   hide('ovOver');
 }
-function toMenu(){
-  G.state = 'menu'; G.score = 0; G.level = 1; G.levelBase = 0;
+function toFactory(){
+  SND.ac(); SND.click();
+  G.scene = 'factory'; G.state = 'menu'; G.score = 0; G.level = 1; G.levelBase = 0;
   genLevel(1); resetClaw();
   stopLaugh();
-  hide('ovPause'); hide('ovClear'); hide('ovOver'); show('ovMenu');
+  G.dandanDead = false; G.dandanFaceDead = false; G.bomb = null; G.angryState = null;
+  hide('ovPause'); hide('ovClear'); hide('ovOver'); hide('ovMenu');
+  show('ovFactory');
 }
 function levelClear(){
-  G.state = 'clear'; SND.fanfare();
+  G.state = 'clear'; SND.fanfare(); SND.applause(); SND.cheer();
   document.getElementById('clearText').textContent = '当前关卡累计 $' + G.score.toLocaleString() + ' ／ 目标 $' + G.target.toLocaleString();
   show('ovClear');
 }
 function gameOver(){
-  G.state = 'over'; SND.fail();
+  G.state = 'overAnim'; SND.fail();
   stopLaugh();
   var lack = Math.max(0, G.target - G.score);
-  document.getElementById('overText').textContent = '还差 $' + lack.toLocaleString() + ' 没挖够';
-  show('ovOver');
-  playLaugh();
+  document.getElementById('overText').textContent = '还差 $' + lack.toLocaleString() + ' 没抓够';
+  dropBomb();
+  // 等炸弹落地爆炸后再弹失败面板
+  setTimeout(function(){
+    G.state = 'over';
+    show('ovOver');
+    setTimeout(function(){ playLaugh(); }, 400);
+  }, 2800);
 }
 function resetClaw(){
   G.claw = { angle: 0, len: MINLEN, st: 'swing', phase: Math.random() * 6.28, item: null };
 }
 
 function togglePause(){
+  SND.click();
   if(G.state === 'play'){
     G.state = 'paused'; show('ovPause');
     try{ laughAudio.pause(); }catch(e){}
-  }
-  else if(G.state === 'paused'){
+  } else if(G.state === 'paused'){
     G.state = 'play'; hide('ovPause');
     if(laughAudioOn){ try{ var p = laughAudio.play(); if(p && p.catch) p.catch(function(){}); }catch(e){} }
   }
 }
 function toggleSound(){
   SND.muted = !SND.muted;
-  try{ laughAudio.muted = SND.muted; }catch(e){}
+  try{ laughAudio.muted = SND.muted; bgmAudio.muted = SND.muted; }catch(e){}
   document.getElementById('btnSound').innerHTML = SND.muted
     ? '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
     : '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
@@ -563,7 +840,7 @@ function dropOrRetract(){
   if(G.state !== 'play') return;
   var c = G.claw;
   if(c.st === 'swing'){ c.st = 'drop'; SND.drop(); }
-  else if(c.st === 'drop'){ c.st = 'retract'; c.item = null; }
+  else if(c.st === 'drop'){ c.st = 'retract'; c.item = null; onMiss(); }
 }
 
 function updateHUD(){
@@ -575,11 +852,26 @@ function updateHUD(){
   document.getElementById('timeStat').className = 'stat' + (G.time <= 10 ? ' warn' : '');
 }
 
-/* ================= 更新 ================= */
 function update(dt){
   G.shake = Math.max(0, G.shake - dt);
   if(G.laughClock > 0) G.laughClock += dt;
   updateFx(dt);
+  updateBomb(dt);
+  updateWander(dt);
+  updatePivot(dt);
+  updateAngry(dt);
+  if(G.state === 'rareShow'){
+    G.rareShowTimer -= dt;
+    if(G.rareShowTimer <= 0) hideRareShow();
+    return;
+  }
+  if(G.scene === 'play' && G.state === 'play'){
+    G.planeX += G.planeDir * 60 * dt;
+    if(G.planeX > W - 80){ G.planeX = W - 80; G.planeDir = -1; }
+    if(G.planeX < 80){ G.planeX = 80; G.planeDir = 1; }
+    if(G.odAngry > 0) G.odAngry -= dt;
+    if(G.dandanJump > 0) G.dandanJump -= dt;
+  }
   if(G.state === 'menu'){ swingOnly(dt); return; }
   if(G.state !== 'play') return;
   G.time -= dt;
@@ -589,7 +881,6 @@ function update(dt){
   updateHUD();
 }
 
-/* ================= 绘制 ================= */
 function drawText(txt, x, y, size, color, stroke){
   ctx.font = size + 'px ' + FONT;
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -600,7 +891,6 @@ function drawText(txt, x, y, size, color, stroke){
   ctx.fillStyle = color;
   ctx.fillText(txt, x, y);
 }
-
 function roundRect(x, y, w, h, r){
   ctx.beginPath();
   ctx.moveTo(x + r, y);
@@ -612,18 +902,14 @@ function roundRect(x, y, w, h, r){
 }
 
 function drawBg(){
-  // 天空
   var sky = ctx.createLinearGradient(0, 0, 0, 152);
   sky.addColorStop(0, '#a9dcff'); sky.addColorStop(1, '#e7f6ff');
   ctx.fillStyle = sky; ctx.fillRect(0, 0, W, 152);
-  // 草地
   ctx.fillStyle = '#58a84f'; ctx.fillRect(0, 132, W, 24);
   ctx.fillStyle = '#3f8038'; ctx.fillRect(0, 150, W, 8);
-  // 泥土
   var soil = ctx.createLinearGradient(0, 158, 0, H);
   soil.addColorStop(0, '#8a5a2b'); soil.addColorStop(0.5, '#7a4a21'); soil.addColorStop(1, '#4d2f14');
   ctx.fillStyle = soil; ctx.fillRect(0, 158, W, H - 158);
-  // 装饰
   for(var i = 0; i < G.deco.length; i++){
     var d = G.deco[i];
     if(d.c === 'root'){
@@ -639,26 +925,181 @@ function drawBg(){
 }
 
 function drawHouse(){
-  // 屋顶
+  var hx = 490; // 房子固定不动
   ctx.fillStyle = '#8a4b22';
-  ctx.beginPath(); ctx.moveTo(W / 2 - 72, 66); ctx.lineTo(W / 2 + 72, 66); ctx.lineTo(W / 2, 38); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(hx - 72, 66); ctx.lineTo(hx + 72, 66); ctx.lineTo(hx, 38); ctx.closePath(); ctx.fill();
   ctx.fillStyle = '#a05c2a';
-  ctx.beginPath(); ctx.moveTo(W / 2 - 72, 66); ctx.lineTo(W / 2 + 72, 66); ctx.lineTo(W / 2, 44); ctx.closePath(); ctx.fill();
-  // 房身
+  ctx.beginPath(); ctx.moveTo(hx - 72, 66); ctx.lineTo(hx + 72, 66); ctx.lineTo(hx, 44); ctx.closePath(); ctx.fill();
   ctx.fillStyle = '#6b4226';
-  roundRect(W / 2 - 58, 66, 116, 64, 6); ctx.fill();
+  roundRect(hx - 58, 66, 116, 64, 6); ctx.fill();
   ctx.fillStyle = '#57321a';
-  roundRect(W / 2 - 58, 66, 116, 12, 6); ctx.fill();
-  // 窗
+  roundRect(hx - 58, 66, 116, 12, 6); ctx.fill();
   ctx.fillStyle = '#ffe9a0';
-  roundRect(W / 2 - 20, 80, 40, 28, 5); ctx.fill();
+  roundRect(hx - 20, 80, 40, 28, 5); ctx.fill();
   ctx.strokeStyle = '#57321a'; ctx.lineWidth = 3;
-  ctx.beginPath(); ctx.moveTo(W / 2, 80); ctx.lineTo(W / 2, 108); ctx.moveTo(W / 2 - 20, 94); ctx.lineTo(W / 2 + 20, 94); ctx.stroke();
-  // 吊轮
+  ctx.beginPath(); ctx.moveTo(hx, 80); ctx.lineTo(hx, 108); ctx.moveTo(hx - 20, 94); ctx.lineTo(hx + 20, 94); ctx.stroke();
   ctx.fillStyle = '#3a2410';
   ctx.beginPath(); ctx.arc(PIVOT.x, PIVOT.y + 3, 9, 0, Math.PI * 2); ctx.fill();
   ctx.fillStyle = '#caa44e';
   ctx.beginPath(); ctx.arc(PIVOT.x, PIVOT.y + 3, 4, 0, Math.PI * 2); ctx.fill();
+}
+
+function drawDandan(){
+  var x = G.dandanX, y = G.dandanY;
+  // 高兴连跳两下：0.5 秒内两个抛物线
+  if(G.dandanJump > 0){
+    var jp = 1 - G.dandanJump / 0.5; // 0..1
+    var jump = Math.abs(Math.sin(jp * Math.PI * 2)) * -12;
+    y += jump;
+  }
+  ctx.save();
+  // 身体始终原色，永远不黑
+  ctx.strokeStyle = '#1a1a1a';
+  ctx.lineWidth = 2.5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x, y + 14);
+  ctx.moveTo(x - 14, y + 6);
+  ctx.lineTo(x, y + 8);
+  ctx.lineTo(x + 14, y + 6);
+  ctx.moveTo(x, y + 14);
+  ctx.lineTo(x - 8, y + 26);
+  ctx.moveTo(x, y + 14);
+  ctx.lineTo(x + 8, y + 26);
+  ctx.stroke();
+  var headSize = 36;
+  var headCy = y - 20;
+  if(IMG.dandan && IMG.dandan.complete && IMG.dandan.naturalWidth > 0){
+    ctx.drawImage(IMG.dandan, x - headSize/2, headCy - headSize/2, headSize, headSize);
+  } else {
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(x, headCy, headSize/2, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#1a1a1a'; ctx.lineWidth = 2; ctx.stroke();
+  }
+  if(G.dandanFaceDead){
+    ctx.fillStyle = 'rgba(20,20,20,0.82)';
+    ctx.beginPath(); ctx.arc(x, headCy, headSize/2, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawOdPlane(){
+  if(G.scene !== 'play') return;
+  var x = G.planeX, y = G.planeY;
+  var angry = G.odAngry > 0;
+  ctx.save();
+  // 飞机阴影
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.beginPath(); ctx.ellipse(x, y + 14, 32, 4, 0, 0, Math.PI * 2); ctx.fill();
+  // 机身（白色椭圆）
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#9ab8d6'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.ellipse(x, y, 34, 11, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  // 座舱
+  ctx.fillStyle = '#cfe6ff';
+  ctx.beginPath(); ctx.ellipse(x - 6, y - 4, 14, 7, 0, 0, Math.PI * 2); ctx.fill();
+  // 机翼
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#9ab8d6'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x - 18, y - 2); ctx.lineTo(x - 10, y - 22); ctx.lineTo(x + 6, y - 22); ctx.lineTo(x + 12, y - 2);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  // 尾翼
+  ctx.beginPath();
+  ctx.moveTo(x + 24, y - 4); ctx.lineTo(x + 32, y - 16); ctx.lineTo(x + 38, y - 4);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  // 螺旋桨
+  ctx.strokeStyle = '#666'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(x - 34, y); ctx.lineTo(x - 42, y); ctx.stroke();
+  ctx.beginPath(); ctx.ellipse(x - 42, y, 2, 8, 0, 0, Math.PI * 2); ctx.fillStyle = '#888'; ctx.fill();
+  // od 只露上半身（从源图裁上半部分）
+  if(IMG.od && IMG.od.complete && IMG.od.naturalWidth > 0){
+    var ow = IMG.od.naturalWidth, oh = IMG.od.naturalHeight;
+    // 源图上半部分（头+肩）
+    var srcH = oh * 0.45;
+    var dw = 30, dh = dw * srcH / ow;
+    ctx.drawImage(IMG.od, 0, 0, ow, srcH, x - dw/2, y - dh - 2, dw, dh);
+  }
+  if(angry){
+    ctx.fillStyle = '#ff6b3a';
+    ctx.beginPath(); ctx.arc(x - 6, y - 40, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x + 2, y - 44, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x + 8, y - 38, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#ffd75e';
+    ctx.beginPath(); ctx.arc(x + 2, y - 44, 3, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawBomb(){
+  if(!G.bomb || G.bomb.exploded) return;
+  ctx.save();
+  ctx.fillStyle = '#222';
+  ctx.beginPath(); ctx.arc(G.bomb.x, G.bomb.y, 8, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#666';
+  ctx.beginPath(); ctx.arc(G.bomb.x - 3, G.bomb.y - 3, 2, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+function roundRectPath(x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+function drawAngryCutscene(){
+  if(!G.angryState) return;
+  var a = G.angryState;
+  // od：占右下角一大半，到腰部，保持比例不拉伸
+  var odW = 340;
+  var srcHratio = 0.72; // 裁到腰部
+  var natW = IMG.angry ? IMG.angry.naturalWidth : 1664;
+  var natH = IMG.angry ? IMG.angry.naturalHeight : 2368;
+  var srcH = natH * srcHratio;
+  var odH = odW * (srcH / natW); // 保持比例
+  var targetX = W - odW - 0, odY = H - odH;
+  var slideT = Math.min(a.timer / 0.35, 1);
+  var ease = 1 - Math.pow(1 - slideT, 3);
+  var odX = W + 30 - (W + 30 - targetX) * ease;
+  var swing = Math.sin(a.timer * 14) * 0.08;
+  ctx.save();
+  ctx.translate(odX + odW/2, odY + odH * 0.5);
+  ctx.rotate(swing);
+  ctx.translate(-(odX + odW/2), -(odY + odH * 0.5));
+  if(IMG.angry && IMG.angry.complete && IMG.angry.naturalWidth > 0){
+    ctx.drawImage(IMG.angry, 0, 0, natW, srcH, odX, odY, odW, odH);
+  }
+  ctx.restore();
+  // 对话框：移到底部居中，黄色圆角按钮形状（和图二一致）
+  var bw = 280, bh = 56;
+  var bx = (W - bw) / 2, by = H - bh - 8;
+  ctx.fillStyle = '#ffd75e';
+  ctx.strokeStyle = '#a06810';
+  ctx.lineWidth = 3;
+  roundRectPath(bx, by, bw, bh, 14);
+  ctx.fill(); ctx.stroke();
+  // 打字机效果
+  var chars = Math.min(a.quote.length, Math.floor((a.timer - 0.35) * 12));
+  if(chars > 0){
+    ctx.fillStyle = '#4a2c0f';
+    ctx.font = 'bold 18px ' + FONT;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(a.quote.substring(0, chars), bx + bw/2, by + bh/2);
+  }
+  // 子弹
+  if(!a.bullet.hit){
+    ctx.fillStyle = '#222';
+    ctx.beginPath(); ctx.arc(a.bullet.x, a.bullet.y, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#ff6b3a';
+    ctx.beginPath(); ctx.arc(a.bullet.x - 2, a.bullet.y - 2, 2, 0, Math.PI * 2); ctx.fill();
+  }
 }
 
 function drawChain(){
@@ -670,7 +1111,6 @@ function drawChain(){
   ctx.beginPath(); ctx.moveTo(PIVOT.x, PIVOT.y + 4); ctx.lineTo(t.x, t.y); ctx.stroke();
   ctx.strokeStyle = 'rgba(0,0,0,0.25)'; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(PIVOT.x + 1.5, PIVOT.y + 4); ctx.lineTo(t.x + 1.5, t.y); ctx.stroke();
-  // 钩爪
   ctx.save();
   ctx.translate(t.x, t.y); ctx.rotate(c.angle);
   ctx.fillStyle = '#43331f';
@@ -694,7 +1134,6 @@ function drawDiamond(x, y, s, t){
   var tw = 0.65 + 0.35 * Math.sin(t * 4.2);
   ctx.globalAlpha = tw;
   var h = s, w = s;
-  // 主体：冠部 + 底部锥体（小而亮）
   var g = ctx.createLinearGradient(0, -h / 2, 0, h / 2);
   g.addColorStop(0, '#ffffff'); g.addColorStop(0.35, '#c8f0ff'); g.addColorStop(0.7, '#5db4ec'); g.addColorStop(1, '#1f6bd0');
   ctx.fillStyle = g;
@@ -706,7 +1145,6 @@ function drawDiamond(x, y, s, t){
   ctx.lineTo(-w / 2, h * 0.05);
   ctx.lineTo(-w * 0.4, -h * 0.42);
   ctx.closePath(); ctx.fill();
-  // 台面高光
   ctx.fillStyle = 'rgba(255,255,255,0.95)';
   ctx.beginPath();
   ctx.moveTo(0, -h / 2);
@@ -714,7 +1152,6 @@ function drawDiamond(x, y, s, t){
   ctx.lineTo(0, -h * 0.34);
   ctx.lineTo(-w * 0.4, -h * 0.42);
   ctx.closePath(); ctx.fill();
-  // 十字星芒
   var fl = (0.5 + 0.5 * Math.sin(t * 5)) * s * 0.42;
   ctx.strokeStyle = 'rgba(255,255,255,0.9)';
   ctx.lineWidth = 1.2;
@@ -722,7 +1159,6 @@ function drawDiamond(x, y, s, t){
   ctx.moveTo(-fl, 0); ctx.lineTo(fl, 0);
   ctx.moveTo(0, -fl * 1.2); ctx.lineTo(0, fl * 0.8);
   ctx.stroke();
-  // 小亮点
   ctx.fillStyle = '#ffffff';
   ctx.beginPath(); ctx.arc(-w * 0.15, -h * 0.1, s * 0.09, 0, Math.PI * 2); ctx.fill();
   ctx.globalAlpha = 1;
@@ -766,12 +1202,21 @@ function drawItems(t){
         var shrink = 1, lift = 0;
         if(G.claw.st === 'retract'){
           var l = G.claw.len;
-          shrink = Math.max(0.06, (l - MINLEN) / 140);   // 靠近房子时缩小
-          lift = (1 - shrink) * 55;                       // 同时向上升进房子里
+          shrink = Math.max(0.06, (l - MINLEN) / 140);
+          lift = (1 - shrink) * 55;
         }
         drawLaughFrame(it.x, it.y - 10 - lift, (it.h * 1.5 * shrink) / SHEET_H, G.laughClock);
       } else {
-        ctx.drawImage(IMG.big, it.x - it.w / 2, it.y - it.h / 2, it.w, it.h);
+        // wander 时根据方向镜像翻转
+        if(it.wander && it.wander.dir < 0){
+          ctx.save();
+          ctx.translate(it.x, 0);
+          ctx.scale(-1, 1);
+          ctx.drawImage(IMG.big, -it.w/2, it.y - it.h/2, it.w, it.h);
+          ctx.restore();
+        } else {
+          ctx.drawImage(IMG.big, it.x - it.w / 2, it.y - it.h / 2, it.w, it.h);
+        }
       }
     } else if(it.type === 'small' || it.type === 'tiny'){
       var scale = it.type === 'tiny' ? 0.72 : 1;
@@ -780,7 +1225,32 @@ function drawItems(t){
       var rim = IMG.rare[it.rareId];
       var rh = it.h;
       var rw = rim && rim.naturalWidth ? rh * rim.naturalWidth / rim.naturalHeight : rh * 0.9;
-      // 脚下小投影（独立画，避免 drawShadow 悬空）
+      // 发光光晕
+      var glowR = rh * 0.9;
+      var glow = ctx.createRadialGradient(it.x, it.y, 0, it.x, it.y, glowR);
+      glow.addColorStop(0, 'rgba(255,225,77,0.55)');
+      glow.addColorStop(0.5, 'rgba(255,157,61,0.25)');
+      glow.addColorStop(1, 'rgba(255,157,61,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(it.x, it.y, glowR, 0, Math.PI*2); ctx.fill();
+      // 旋转光束（6条）
+      ctx.save();
+      ctx.translate(it.x, it.y);
+      ctx.rotate(t * 1.5);
+      for(var ri = 0; ri < 6; ri++){
+        ctx.rotate(Math.PI / 3);
+        var rayGrad = ctx.createLinearGradient(0, 0, glowR, 0);
+        rayGrad.addColorStop(0, 'rgba(255,240,150,0.6)');
+        rayGrad.addColorStop(1, 'rgba(255,240,150,0)');
+        ctx.fillStyle = rayGrad;
+        ctx.beginPath();
+        ctx.moveTo(0, -4);
+        ctx.lineTo(glowR, -1);
+        ctx.lineTo(glowR, 1);
+        ctx.lineTo(0, 4);
+        ctx.closePath(); ctx.fill();
+      }
+      ctx.restore();
       ctx.fillStyle = 'rgba(0,0,0,0.22)';
       ctx.beginPath(); ctx.ellipse(it.x, it.y + rh * 0.46, rw * 0.4, 6, 0, 0, Math.PI * 2); ctx.fill();
       ctx.drawImage(rim, it.x - rw / 2, it.y - rh / 2, rw, rh);
@@ -827,32 +1297,45 @@ function draw(){
   drawItems(performance.now() / 1000);
   drawChain();
   drawHouse();
+  drawDandan();
+  drawOdPlane();
+  drawBomb();
+  drawAngryCutscene();
   drawLaughBursts();
   drawFx();
   ctx.restore();
 }
 
-/* ================= 输入 ================= */
 canvas.addEventListener('pointerdown', function(e){
-  e.preventDefault();
-  SND.ac();
-  dropOrRetract();
+  e.preventDefault(); SND.ac(); startBgm(); dropOrRetract();
 });
 document.addEventListener('keydown', function(e){
-  if(e.code === 'Space' || e.code === 'ArrowDown'){ e.preventDefault(); SND.ac(); dropOrRetract(); }
+  if(e.code === 'Space' || e.code === 'ArrowDown'){ e.preventDefault(); SND.ac(); startBgm(); dropOrRetract(); }
   else if(e.key === 'p' || e.key === 'P'){ togglePause(); }
   else if(e.key === 'm' || e.key === 'M'){ toggleSound(); }
 });
 canvas.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 
-/* ================= 图鉴 ================= */
+var INTRO_SCENES = [
+  { img: 'assets/frog-small.png',  text: '从前，奶蛙和人类和平共处，快乐地生活在森林里……' },
+  { img: 'assets/od-boss.png',     text: '但邪恶的od厂长发现，奶蛙做成的黄桃罐头异常美味！' },
+  { img: 'assets/frog-big.png',    text: '他开始在各地搜捕奶蛙，把它们抓进工厂……' },
+  { img: 'assets/dandan-head.png', text: '他的手下蛋蛋，正在帮他抓捕奶蛙。而你——就是蛋蛋！' },
+  { img: 'assets/frog-rare-5.png', text: '抓齐所有稀有奶蛙，成为od厂长最得力的助手！' }
+];
+var introIdx = 0;
+function startIntro(){ introIdx = 0; show('ovIntro'); showIntroScene(); }
+function showIntroScene(){
+  var s = INTRO_SCENES[introIdx];
+  document.getElementById('introContent').innerHTML = '<img class="introImg" src="' + s.img + '"><div class="introScene">' + s.text + '</div>';
+}
+function nextIntro(){ SND.ac(); SND.click(); introIdx++; if(introIdx >= INTRO_SCENES.length){ hide('ovIntro'); } else { showIntroScene(); } }
+document.getElementById('ovIntro').addEventListener('click', nextIntro);
+
 var dexPrevState = 'menu';
 function showDex(){
   dexPrevState = G.state;
-  if(G.state === 'play'){
-    G.state = 'dex';
-    try{ laughAudio.pause(); }catch(e){}
-  }
+  if(G.state === 'play'){ G.state = 'dex'; try{ laughAudio.pause(); }catch(e){} }
   var dex = loadDex();
   var cells = [
     { name:'小奶蛙', src:'assets/frog-small.png', owned:true },
@@ -879,6 +1362,7 @@ function showDex(){
   show('ovDex');
 }
 function closeDex(){
+  SND.ac(); SND.click();
   hide('ovDex');
   if(dexPrevState === 'play'){
     G.state = 'play';
@@ -886,24 +1370,32 @@ function closeDex(){
   }
 }
 
-/* ================= 按钮 ================= */
 function $(id){ return document.getElementById(id); }
 function show(id){ $(id).classList.remove('hidden'); }
 function hide(id){ $(id).classList.add('hidden'); }
 
-$('btnStart').addEventListener('click', function(){ SND.ac(); startGame(); });
-$('btnDex').addEventListener('click', function(){ SND.ac(); showDex(); });
-$('btnDexHud').addEventListener('click', function(){ SND.ac(); showDex(); });
+document.querySelectorAll('.diffBtn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.diffBtn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    G.difficulty = btn.dataset.diff;
+    SND.click();
+  });
+});
+$('btnIntro').addEventListener('click', function(){ SND.ac(); SND.click(); startIntro(); });
+$('btnPlay').addEventListener('click', function(){ SND.ac(); SND.click(); startGame(); });
+$('btnStart').addEventListener('click', function(){ SND.ac(); SND.click(); enterMiner(); });
+$('btnDex').addEventListener('click', function(){ SND.ac(); SND.click(); showDex(); });
+$('btnDexHud').addEventListener('click', function(){ SND.ac(); SND.click(); showDex(); });
 $('btnDexClose').addEventListener('click', closeDex);
-$('btnQuit').addEventListener('click', function(){ toMenu(); });
+$('btnQuit').addEventListener('click', toFactory);
 $('btnPause').addEventListener('click', togglePause);
 $('btnSound').addEventListener('click', toggleSound);
 $('btnResume').addEventListener('click', togglePause);
 $('btnNext').addEventListener('click', nextLevel);
 $('btnRetry').addEventListener('click', retryLevel);
-$('btnMenu').addEventListener('click', toMenu);
+$('btnMenu').addEventListener('click', toFactory);
 
-/* ================= 主循环 ================= */
 genLevel(1);
 resetClaw();
 updateHUD();
