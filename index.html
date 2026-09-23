@@ -48,7 +48,7 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .frogs img{width:72px;height:auto;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:bob 2.2s ease-in-out infinite;}
 .frogs img:nth-child(2){width:52px;animation-delay:.6s;}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.laughBox{width:162px;height:216px;margin:10px auto 4px;background-image:url('assets/laugh-sheet2.png');background-size:3240px 216px;animation:laughplay 1.8s steps(20) infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));}
+.laughBox{width:162px;height:216px;margin:10px auto 4px;background-image:url('assets/laugh-sheet2.webp');background-size:3240px 216px;animation:laughplay 1.8s steps(20) infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));}
 @keyframes laughplay{from{background-position:0 0}to{background-position:-3240px 0}}
 .dexGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px auto 6px;max-width:440px;}
 .dexCell{background:rgba(0,0,0,.22);border:2px solid #7a4a21;border-radius:12px;padding:8px 4px 6px;text-align:center;}
@@ -132,15 +132,15 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 
   <div class="stage">
     <canvas id="game" width="800" height="600"></canvas>
-    <img id="sheetImg" src="assets/laugh-sheet2.png" alt="" style="display:none" aria-hidden="true">
-    <img id="dandanImg" src="assets/dandan-head.png" alt="" style="display:none" aria-hidden="true">
-    <img id="odImg" src="assets/od-boss.png" alt="" style="display:none" aria-hidden="true">
-    <img id="diamondIcon" src="assets/diamond-icon.png" style="display:none" alt="">
-    <img id="odAngryImg" src="assets/od-angry.png" alt="" style="display:none" aria-hidden="true">
+    <img id="sheetImg" src="assets/laugh-sheet2.webp" alt="" style="display:none" aria-hidden="true">
+    <img id="dandanImg" src="assets/dandan-head.webp" alt="" style="display:none" aria-hidden="true">
+    <img id="odImg" src="assets/od-boss.webp" alt="" style="display:none" aria-hidden="true">
+    <img id="diamondIcon" src="assets/diamond-icon.webp" style="display:none" alt="">
+    <img id="odAngryImg" src="assets/od-angry.webp" alt="" style="display:none" aria-hidden="true">
     <div style="display:none" aria-hidden="true">
-      <img src="assets/frog-rare-1.png"><img src="assets/frog-rare-2.png"><img src="assets/frog-rare-3.png">
-      <img src="assets/frog-rare-4.png"><img src="assets/frog-rare-5.png"><img src="assets/frog-rare-6.png">
-      <img src="assets/frog-rare-7.png"><img src="assets/frog-rare-8.png"><img src="assets/frog-rare-9.png">
+      <img src="assets/frog-rare-1.webp"><img src="assets/frog-rare-2.webp"><img src="assets/frog-rare-3.webp">
+      <img src="assets/frog-rare-4.webp"><img src="assets/frog-rare-5.webp"><img src="assets/frog-rare-6.webp">
+      <img src="assets/frog-rare-7.webp"><img src="assets/frog-rare-8.webp"><img src="assets/frog-rare-9.webp"><img src="assets/frog-rare-10.webp"><img src="assets/frog-rare-11.webp"><img src="assets/frog-rare-12.webp"><img src="assets/frog-rare-13.webp"><img src="assets/frog-rare-14.webp"><img src="assets/frog-rare-15.webp"><img src="assets/frog-rare-16.webp"><img src="assets/frog-rare-17.webp"><img src="assets/frog-rare-18.webp"><img src="assets/frog-rare-19.webp"><img src="assets/frog-rare-20.webp"><img src="assets/frog-rare-21.webp"><img src="assets/frog-rare-22.webp"><img src="assets/frog-rare-23.webp"><img src="assets/frog-rare-24.webp"><img src="assets/frog-rare-25.webp"><img src="assets/frog-rare-26.webp"><img src="assets/frog-rare-27.webp"><img src="assets/frog-rare-28.webp"><img src="assets/frog-rare-29.webp"><img src="assets/frog-rare-30.webp"><img src="assets/frog-rare-31.webp"><img src="assets/frog-rare-32.webp"><img src="assets/frog-rare-33.webp"><img src="assets/frog-rare-34.webp"><img src="assets/frog-rare-35.webp"><img src="assets/frog-rare-36.webp"><img src="assets/frog-rare-37.webp"><img src="assets/frog-rare-38.webp"><img src="assets/frog-rare-39.webp"><img src="assets/frog-rare-40.webp"><img src="assets/frog-rare-41.webp"><img src="assets/frog-rare-42.webp"><img src="assets/frog-rare-43.webp"><img src="assets/frog-rare-44.webp"><img src="assets/frog-rare-45.webp"><img src="assets/frog-rare-46.webp"><img src="assets/frog-rare-47.webp">
     </div>
     <audio id="laughAudio" src="assets/laugh-audio.mp3" preload="auto" loop></audio>
     <audio id="bgmAudio" src="assets/bgm.mp3" preload="auto" loop></audio>
@@ -153,11 +153,11 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
     </div>
 
     <div id="ovFactory" class="factoryScreen hidden">
-      <img class="factoryOd" src="assets/od-menu.png" alt="od厂长">
+      <img class="factoryOd" src="assets/od-menu.webp" alt="od厂长">
             <div class="factoryLeft">
         <h1 class="factoryTitle">奶蛙工厂</h1>
         <div id="btnPlay" class="frogBtn" role="button" tabindex="0">
-          <img src="assets/frog-small.png" alt="开始游戏">
+          <img src="assets/frog-small.webp" alt="开始游戏">
           <span class="frogBtnLabel">开始游戏</span>
         </div>
         <div class="factorySub">
@@ -180,7 +180,7 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
     <div id="ovMenu" class="overlay hidden">
       <div class="card">
         <h1>奶蛙矿工</h1>
-        <div class="frogs"><img src="assets/frog-big.png" alt="大奶蛙"><img src="assets/frog-small.png" alt="小奶蛙"></div>
+        <div class="frogs"><img src="assets/frog-big.webp" alt="大奶蛙"><img src="assets/frog-small.webp" alt="小奶蛙"></div>
         <ul class="rules">
           <li>你是蛋蛋，od厂长的手下，负责抓奶蛙</li>
           <li>每关有一只稀有小奶蛙，抓到可解锁图鉴</li>
@@ -270,24 +270,62 @@ setTimeout(function(){
 }, 800);
 function loadImg(src){ var im = new Image(); im.onload = tickLoad; im.onerror = tickLoad; im.src = src; return im; }
 var RARE = [
-  { id:1, name:'呐喊蛙',   img:'assets/frog-rare-1.png', value:600 },
-  { id:2, name:'洛丽塔蛙', img:'assets/frog-rare-2.png', value:650 },
-  { id:3, name:'艺术蛙',   img:'assets/frog-rare-3.png', value:650 },
-  { id:4, name:'奶茶蛙',   img:'assets/frog-rare-4.png', value:600 },
-  { id:5, name:'吸猫蛙',   img:'assets/frog-rare-5.png', value:700 },
-  { id:6, name:'蹦蹦蛙',   img:'assets/frog-rare-6.png', value:550 },
-  { id:7, name:'耶耶蛙',   img:'assets/frog-rare-7.png', value:600 },
-  { id:8, name:'花束蛙',   img:'assets/frog-rare-8.png', value:650 },
-  { id:9, name:'生气蛙',   img:'assets/frog-rare-9.png', value:550 }
+  { id:1, name:'呐喊蛙',   img:'assets/frog-rare-1.webp', value:600 },
+  { id:2, name:'洛丽塔蛙', img:'assets/frog-rare-2.webp', value:650 },
+  { id:3, name:'艺术蛙',   img:'assets/frog-rare-3.webp', value:650 },
+  { id:4, name:'奶茶蛙',   img:'assets/frog-rare-4.webp', value:600 },
+  { id:5, name:'吸猫蛙',   img:'assets/frog-rare-5.webp', value:700 },
+  { id:6, name:'蹦蹦蛙',   img:'assets/frog-rare-6.webp', value:550 },
+  { id:7, name:'耶耶蛙',   img:'assets/frog-rare-7.webp', value:600 },
+  { id:8, name:'花束蛙',   img:'assets/frog-rare-8.webp', value:650 },
+  { id:9, name:'生气蛙',   img:'assets/frog-rare-9.webp', value:550 },
+  { id:10, name:'打工奶龙', img:'assets/frog-rare-10.webp', value:620 },
+  { id:11, name:'摆烂奶龙', img:'assets/frog-rare-11.webp', value:657 },
+  { id:12, name:'摸鱼奶龙', img:'assets/frog-rare-12.webp', value:694 },
+  { id:13, name:'搬砖奶龙', img:'assets/frog-rare-13.webp', value:731 },
+  { id:14, name:'加班奶龙', img:'assets/frog-rare-14.webp', value:768 },
+  { id:15, name:'干饭奶龙', img:'assets/frog-rare-15.webp', value:805 },
+  { id:16, name:'追剧奶龙', img:'assets/frog-rare-16.webp', value:842 },
+  { id:17, name:'打游戏奶龙', img:'assets/frog-rare-17.webp', value:579 },
+  { id:18, name:'睡觉奶龙', img:'assets/frog-rare-18.webp', value:616 },
+  { id:19, name:'拼豆奶鼠', img:'assets/frog-rare-19.webp', value:653 },
+  { id:20, name:'萌脸奶龙', img:'assets/frog-rare-20.webp', value:690 },
+  { id:21, name:'眨眼奶龙', img:'assets/frog-rare-21.webp', value:727 },
+  { id:22, name:'全员奶蛙', img:'assets/frog-rare-22.webp', value:764 },
+  { id:23, name:'气鼓鼓蛙', img:'assets/frog-rare-23.webp', value:801 },
+  { id:24, name:'野生奶蛙', img:'assets/frog-rare-24.webp', value:838 },
+  { id:25, name:'送花蛙一', img:'assets/frog-rare-25.webp', value:575 },
+  { id:26, name:'送花蛙二', img:'assets/frog-rare-26.webp', value:612 },
+  { id:27, name:'宇宙奶蛙', img:'assets/frog-rare-27.webp', value:649 },
+  { id:28, name:'日常蛙一', img:'assets/frog-rare-28.webp', value:686 },
+  { id:29, name:'日常蛙二', img:'assets/frog-rare-29.webp', value:723 },
+  { id:30, name:'瞅一眼蛙一', img:'assets/frog-rare-30.webp', value:760 },
+  { id:31, name:'日常蛙三', img:'assets/frog-rare-31.webp', value:797 },
+  { id:32, name:'日常蛙四', img:'assets/frog-rare-32.webp', value:834 },
+  { id:33, name:'瞅一眼蛙二', img:'assets/frog-rare-33.webp', value:571 },
+  { id:34, name:'日常蛙五', img:'assets/frog-rare-34.webp', value:608 },
+  { id:35, name:'瞅一眼蛙三', img:'assets/frog-rare-35.webp', value:645 },
+  { id:36, name:'日常蛙六', img:'assets/frog-rare-36.webp', value:682 },
+  { id:37, name:'瞅一眼蛙四', img:'assets/frog-rare-37.webp', value:719 },
+  { id:38, name:'瞅一眼蛙五', img:'assets/frog-rare-38.webp', value:756 },
+  { id:39, name:'瞅一眼蛙六', img:'assets/frog-rare-39.webp', value:793 },
+  { id:40, name:'美人蛙', img:'assets/frog-rare-40.webp', value:830 },
+  { id:41, name:'喵喵蛙一', img:'assets/frog-rare-41.webp', value:567 },
+  { id:42, name:'喵喵蛙二', img:'assets/frog-rare-42.webp', value:604 },
+  { id:43, name:'喵喵蛙三', img:'assets/frog-rare-43.webp', value:641 },
+  { id:44, name:'乐跑奶龙', img:'assets/frog-rare-44.webp', value:678 },
+  { id:45, name:'打工奶龙二', img:'assets/frog-rare-45.webp', value:715 },
+  { id:46, name:'打工奶龙三', img:'assets/frog-rare-46.webp', value:752 },
+  { id:47, name:'打工奶龙四', img:'assets/frog-rare-47.webp', value:789 }
 ];
 var IMG = {
-  big: loadImg('assets/frog-big.png'),
-  small: loadImg('assets/frog-small.png'),
+  big: loadImg('assets/frog-big.webp'),
+  small: loadImg('assets/frog-small.webp'),
   sheet: document.getElementById('sheetImg'),
   dandan: document.getElementById('dandanImg'),
   od: document.getElementById('odImg'),
   angry: document.getElementById('odAngryImg'),
-  diamond: loadImg('assets/diamond-small.png'),
+  diamond: loadImg('assets/diamond-small.webp'),
   rare:{}
 };
 IMG.sheet.onload = tickLoad; IMG.sheet.onerror = tickLoad;
@@ -1317,11 +1355,11 @@ document.addEventListener('keydown', function(e){
 canvas.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 
 var INTRO_SCENES = [
-  { img: 'assets/frog-small.png',  text: '从前，奶蛙和人类和平共处，快乐地生活在森林里……' },
-  { img: 'assets/od-boss.png',     text: '但邪恶的od厂长发现，奶蛙做成的黄桃罐头异常美味！' },
-  { img: 'assets/frog-big.png',    text: '他开始在各地搜捕奶蛙，把它们抓进工厂……' },
-  { img: 'assets/dandan-head.png', text: '他的手下蛋蛋，正在帮他抓捕奶蛙。而你——就是蛋蛋！' },
-  { img: 'assets/frog-rare-5.png', text: '抓齐所有稀有奶蛙，成为od厂长最得力的助手！' }
+  { img: 'assets/frog-small.webp',  text: '从前，奶蛙和人类和平共处，快乐地生活在森林里……' },
+  { img: 'assets/od-boss.webp',     text: '但邪恶的od厂长发现，奶蛙做成的黄桃罐头异常美味！' },
+  { img: 'assets/frog-big.webp',    text: '他开始在各地搜捕奶蛙，把它们抓进工厂……' },
+  { img: 'assets/dandan-head.webp', text: '他的手下蛋蛋，正在帮他抓捕奶蛙。而你——就是蛋蛋！' },
+  { img: 'assets/frog-rare-5.webp', text: '抓齐所有稀有奶蛙，成为od厂长最得力的助手！' }
 ];
 var introIdx = 0;
 function startIntro(){ introIdx = 0; show('ovIntro'); showIntroScene(); }
@@ -1338,8 +1376,8 @@ function showDex(){
   if(G.state === 'play'){ G.state = 'dex'; try{ laughAudio.pause(); }catch(e){} }
   var dex = loadDex();
   var cells = [
-    { name:'小奶蛙', src:'assets/frog-small.png', owned:true },
-    { name:'大奶蛙', src:'assets/frog-big.png',   owned:true }
+    { name:'小奶蛙', src:'assets/frog-small.webp', owned:true },
+    { name:'大奶蛙', src:'assets/frog-big.webp',   owned:true }
   ];
   RARE.forEach(function(r){
     var owned = dex.indexOf(r.id) >= 0;
@@ -1351,7 +1389,9 @@ function showDex(){
     var cell = document.createElement('div');
     cell.className = 'dexCell' + (c.owned ? '' : ' locked');
     var im = document.createElement('img');
-    im.src = c.src; im.alt = c.name;
+    im.src = c.owned ? c.src : 'assets/frog-small.webp';
+    im.alt = c.name;
+    if(!c.owned) im.style.filter = 'brightness(0) opacity(0.3)'
     var nm = document.createElement('div');
     nm.className = 'nm'; nm.textContent = c.name;
     cell.appendChild(im); cell.appendChild(nm);
