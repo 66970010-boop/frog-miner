@@ -38,7 +38,7 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .frogs img{width:72px;height:auto;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:bob 2.2s ease-in-out infinite;}
 .frogs img:nth-child(2){width:52px;animation-delay:.6s;}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.laughBox{width:144px;height:192px;margin:10px auto 4px;background-image:url('assets/laugh-sheet2.webp');background-size:2880px 192px;animation:laughplay 1.8s steps(20) infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));}
+.laughBox{width:144px;height:192px;margin:10px auto 4px;background-image:url('../assets/laugh-sheet2.png');background-size:2880px 192px;animation:laughplay 1.8s steps(20) infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));}
 @keyframes laughplay{from{background-position:0 0}to{background-position:-2880px 0}}
 .dexGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px auto 6px;max-width:440px;}
 .dexCell{background:rgba(0,0,0,.22);border:2px solid #7a4a21;border-radius:12px;padding:8px 4px 6px;text-align:center;}

@@ -7,7 +7,7 @@
 <title>奶蛙工厂</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='34' r='26' fill='%23ffd93d'/><circle cx='22' cy='30' r='6' fill='%23222'/><circle cx='42' cy='30' r='6' fill='%23222'/><circle cx='22' cy='30' r='2.4' fill='%23fff'/><circle cx='42' cy='30' r='2.4' fill='%23fff'/><path d='M20 46 Q32 56 44 46' stroke='%23a9742f' stroke-width='4' fill='none' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=ZCOOL+KuaiLe&display=swap">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 <div class="page">
@@ -88,7 +88,7 @@
           <li>划动屏幕切开飞来的奶蛙，装进罐头</li>
           <li>大奶蛙分高，切到会捧腹大笑</li>
           <li>切到炸弹直接失败！</li>
-          <li>45秒内切越多分越高</li>
+          <li>45秒内切到目标分数过关，目标随关卡提高</li>
         </ul>
         <button id="btnNinjaStart" class="bigbtn" type="button">开始切奶蛙</button>
       </div>
@@ -100,6 +100,7 @@
         <div class="laughBox" id="ninjaLaughBox" style="display:none;"></div>
         <h2 id="endScoreText" style="color:#ffe14d;margin:14px 0 6px;">得分 0</h2>
         <p style="color:#ffd98a;margin:0 0 16px;" id="endMsg">罐头做好啦！</p>
+        <button id="btnNinjaNext" class="bigbtn" type="button" style="display:none;">下一关</button>
         <button id="btnNinjaRetry" class="bigbtn" type="button">再来一局</button>
         <button id="btnNinjaExit" class="smallbtn" type="button" style="margin-top:10px;">返回工厂</button>
       </div>
@@ -224,11 +225,11 @@
 </div>
 
 <script src="js/vendor/SignalsmithStretch.js"></script>
-<script src="js/data.js?v=3"></script>
-<script src="js/audio.js?v=3"></script>
-<script src="js/game.js?v=3"></script>
-<script src="js/render.js?v=3"></script>
-<script src="js/ninja.js?v=3"></script>
-<script src="js/ui.js?v=3"></script>
+<script src="js/data.js?v=5"></script>
+<script src="js/audio.js?v=5"></script>
+<script src="js/game.js?v=5"></script>
+<script src="js/render.js?v=5"></script>
+<script src="js/ninja.js?v=5"></script>
+<script src="js/ui.js?v=5"></script>
 </body>
 </html>

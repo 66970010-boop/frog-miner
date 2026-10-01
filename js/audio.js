@@ -11,6 +11,8 @@ var LAUGH_FILES = [
   'assets/laugh-3.mp3',
   'assets/laugh-4.mp3'
 ];
+// 失败后的笑声音频：奶蛙矿工 / 奶蛙忍者 输了都循环播放这一个文件
+var LOSS_LAUGH_FILE = 'assets/laugh-audio.mp3';
 // 冰块音效：按冰簇里冰块的数量选择（1块/2块/3块）
 var ICE_FILES = [
   'assets/ice-1.mp3',
@@ -79,6 +81,7 @@ var SND = {
       self.laughDurs = bufs.map(function(b){ return b.duration; });
       buildStretchNodes();
     }).catch(function(){});
+    loadLossLaugh(); // 预载失败笑声
     // 冰块音效（1/2/3 块），同样各建 Stretch 节点以便变调
     Promise.all(ICE_FILES.map(decode)).then(function(bufs){
       self.iceBufs = bufs;
@@ -179,6 +182,13 @@ var localAud = {
     this.voice.loop = true; this.voiceLoop = true;
     try{ this.voice.play(); }catch(e){}
   },
+  playLossLaugh: function(){
+    this.init(); this.setVol();
+    this.voice.src = LOSS_LAUGH_FILE;
+    this.voice.playbackRate = 1;
+    this.voice.loop = true; this.voiceLoop = true;
+    try{ this.voice.play(); }catch(e){}
+  },
   playIce: function(count, rate){
     this.init(); this.setVol();
     this.voice.src = ICE_FILES[Math.max(0, Math.min(2, (count | 0) - 1))];
@@ -273,6 +283,11 @@ function hardStopAll(){
     try{ fallbackSource.disconnect(); }catch(e){}
     fallbackSource = null;
   }
+  if(lossSource){
+    try{ lossSource.stop(); }catch(e){}
+    try{ lossSource.disconnect(); }catch(e){}
+    lossSource = null;
+  }
 }
 
 // 退回方案（Stretch 不可用时）：playbackRate 变调，loop 决定循环或单次
@@ -329,6 +344,49 @@ function playLaugh(rate){
   if(IS_LOCAL_FILE){ localAud.playLaugh(laughRate); return; }
   SND.ac();
   startGrabSound('laugh', -1, true);
+}
+
+/* 失败后的笑声音频：只播 laugh-audio.mp3，循环到离开失败页。
+   本地走 <audio> 降级；部署后走 Web Audio（无需变调，直接循环播）。 */
+var lossBuf = null, lossSource = null, lossLoading = false;
+function loadLossLaugh(cb){
+  if(lossBuf){ if(cb) cb(); return; }
+  if(lossLoading) return;
+  var c = SND.ctx; if(!c){ if(cb) cb(); return; }
+  lossLoading = true;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', LOSS_LAUGH_FILE, true);
+  xhr.responseType = 'arraybuffer';
+  xhr.onload = function(){
+    if(xhr.status === 0 || (xhr.status >= 200 && xhr.status < 300)){
+      try{
+        c.decodeAudioData(xhr.response).then(function(buf){
+          lossBuf = buf;
+          if(cb) cb();
+        }).catch(function(){});
+      }catch(e){}
+    }
+  };
+  xhr.onerror = function(){};
+  xhr.send();
+}
+function startLossSource(){
+  var c = SND.ctx;
+  if(!c || !lossBuf || !SND.fxGain) return;
+  try{
+    if(lossSource){ try{ lossSource.stop(); }catch(e){} try{ lossSource.disconnect(); }catch(e){} }
+    lossSource = c.createBufferSource();
+    lossSource.buffer = lossBuf;
+    lossSource.loop = true;
+    lossSource.connect(SND.fxGain);
+    lossSource.start(0);
+  }catch(e){}
+}
+function playLossLaugh(){
+  if(IS_LOCAL_FILE){ localAud.playLossLaugh(); return; }
+  var c = SND.ac(); if(!c || !SND.fxGain) return;
+  if(lossBuf){ startLossSource(); }
+  else { loadLossLaugh(function(){ startLossSource(); }); }
 }
 /* 抓冰块：count = 冰簇里冰块数量(1~3)，选冰1/冰2/冰3；rate 由冰块大小决定。
    冰块声只播一遍。 */

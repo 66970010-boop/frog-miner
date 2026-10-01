@@ -202,7 +202,8 @@ $('btnSelMiner').addEventListener('click', function(){ SND.click(); hide('ovGame
 $('btnSelNinja').addEventListener('click', function(){ SND.click(); hide('ovGameSelect'); show('ovNinja'); });
 $('btnNinjaStart').addEventListener('click', function(){ SND.click(); hide('ovNinja'); startNinja(); });
 $('btnNinjaRetry').addEventListener('click', function(){ SND.click(); hide('ovNinjaEnd'); startNinja(); });
-$('btnNinjaExit').addEventListener('click', function(){ SND.click(); hide('ovNinjaEnd'); G.scene='factory'; stopLaugh(); show('ovFactory'); });
+$('btnNinjaNext').addEventListener('click', function(){ SND.click(); N.level++; hide('ovNinjaEnd'); startNinja(); });
+$('btnNinjaExit').addEventListener('click', function(){ SND.click(); hide('ovNinjaEnd'); toFactory(); });
 $('btnStart').addEventListener('click', function(){ SND.ac(); SND.click(); show('ovDiff'); });
 $('btnDex').addEventListener('click', function(){ SND.ac(); SND.click(); showDex(); });
 $('btnDexHud').addEventListener('click', function(){ SND.ac(); SND.click(); showDex(); });

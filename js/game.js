@@ -570,8 +570,9 @@ function levelClear(){
   show('ovClear');
 }
 function gameOver(){
-  G.state = 'overAnim'; SND.fail();
+  G.state = 'overAnim';
   stopLaugh();
+  playLossLaugh(); // 输了的音频 = 专用笑声音频（循环到离开失败页）
   var lack = Math.max(0, G.target - G.score);
   document.getElementById('overText').textContent = '还差 $' + lack.toLocaleString() + ' 没抓够';
   dropBomb();
@@ -579,7 +580,6 @@ function gameOver(){
   setTimeout(function(){
     G.state = 'over';
     show('ovOver');
-    setTimeout(function(){ playLaugh(); }, 400);
   }, 2800);
 }
 function resetClaw(){

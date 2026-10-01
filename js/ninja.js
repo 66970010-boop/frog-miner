@@ -1,15 +1,18 @@
 // ===== 奶蛙忍者模式 =====
-var N = { items:[], trail:[], score:0, time:45, spawnT:0, over:false, jarFill:0, lastX:0, lastY:0, cutting:false };
+var N = { items:[], trail:[], score:0, time:45, spawnT:0, over:false, jarFill:0, lastX:0, lastY:0, cutting:false, level:1 };
+// 目标分数：起点低，随关卡数一步步提高（150 + 100×关卡）
+function ninjaTarget(){ return 150 + 100 * N.level; }
 function startNinja(){
   G.scene = 'ninja'; G.state = 'play';
   if(typeof stopLaugh === 'function') stopLaugh();
   N.items = []; N.trail = []; N.score = 0; N.time = 45; N.spawnT = 1; N.over = false; N.jarFill = 0;
   hide('ovNinja'); hide('ovNinjaEnd'); hide('ovFactory'); hide('ovGameSelect');
   hide('ovMenu'); hide('ovDiff');
+  updateNinjaHUD();
 }
 function updateNinja(dt){
   N.time -= dt;
-  if(N.time <= 0 && !N.over){ endNinja(); return; }
+  if(N.time <= 0 && !N.over){ endNinja(N.score < ninjaTarget()); return; }
   N.spawnT -= dt;
   if(N.spawnT <= 0 && !N.over){
     spawnNinjaFrog();
@@ -30,6 +33,7 @@ function updateNinja(dt){
   }
   // 刀光轨迹
   if(N.trail.length > 10) N.trail.shift();
+  updateNinjaHUD();
 }
 function spawnNinjaFrog(){
   var side = Math.random() < 0.5 ? -1 : 1;
@@ -87,13 +91,7 @@ function drawNinja(){
     for(var i=1;i<N.trail.length;i++) ctx.lineTo(N.trail[i].x, N.trail[i].y);
     ctx.stroke();
   }
-  // HUD
-  ctx.fillStyle = '#ffe14d'; ctx.font = 'bold 28px sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('得分: '+N.score, 16, 40);
-  ctx.fillStyle = N.time < 10 ? '#ff6b5e' : '#fff';
-  ctx.textAlign = 'right';
-  ctx.fillText('时间: '+Math.ceil(N.time), W-16, 40);
+  // 得分/时间改由顶部菜单栏显示（见 updateNinjaHUD）
 }
 function drawNinjaFrogImg(it, halfIdx){
   var s = it.size;
@@ -171,21 +169,39 @@ function sliceNinja(x, y){
 }
 function endNinja(failed){
   N.over = true;
-  document.getElementById('endScoreText').textContent = '得分 ' + N.score;
+  var tgt = ninjaTarget();
+  document.getElementById('endScoreText').textContent = '得分 ' + N.score + ' ／ 目标 ' + tgt;
   var lb = document.getElementById('ninjaLaughBox');
   var can = document.getElementById('endCanImg');
+  var nb = document.getElementById('btnNinjaNext');
   if(typeof stopLaugh === 'function') stopLaugh();
   if(failed){
-    document.getElementById('endMsg').textContent = '你切到了炸弹！奶蛙笑你菜！';
+    // 输了：显示奶蛙捧腹大笑动图 + 播放奶蛙笑声音频
+    if(N.time <= 0){
+      document.getElementById('endMsg').textContent = '时间到！还差 ' + Math.max(0, tgt - N.score) + ' 分，奶蛙笑你菜！';
+    } else {
+      document.getElementById('endMsg').textContent = '你切到了炸弹！奶蛙笑你菜！';
+    }
     if(lb) lb.style.display = 'block';
     if(can) can.style.display = 'none';
-    if(typeof playLaugh === 'function') playLaugh();
+    if(nb) nb.style.display = 'none';
+    if(typeof playLossLaugh === 'function') playLossLaugh();
   } else {
-    document.getElementById('endMsg').textContent = N.score > 500 ? '罐头大卖！od厂长很满意！' : '罐头做好啦！';
+    document.getElementById('endMsg').textContent = '达标过关！od厂长很满意！';
     if(lb) lb.style.display = 'none';
     if(can) can.style.display = '';
+    if(nb) nb.style.display = '';
   }
   show('ovNinjaEnd');
+}
+/* 忍者模式 HUD：得分/时间/目标/关卡并入顶部菜单栏，字体与菜单栏一致 */
+function updateNinjaHUD(){
+  var s = document.getElementById('score');  if(s) s.textContent = N.score.toLocaleString();
+  var t = document.getElementById('target'); if(t) t.textContent = ninjaTarget().toLocaleString();
+  var l = document.getElementById('level');  if(l) l.textContent = N.level;
+  var tm = document.getElementById('time');  if(tm) tm.textContent = Math.max(0, Math.ceil(N.time));
+  var ts = document.getElementById('timeStat');
+  if(ts) ts.className = 'stat' + (N.time <= 10 ? ' warn' : '');
 }
 // 鼠标/触摸切割
 canvas.addEventListener('pointermove', function(e){
