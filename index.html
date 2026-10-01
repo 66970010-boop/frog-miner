@@ -7,7 +7,7 @@
 <title>奶蛙工厂</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='34' r='26' fill='%23ffd93d'/><circle cx='22' cy='30' r='6' fill='%23222'/><circle cx='42' cy='30' r='6' fill='%23222'/><circle cx='22' cy='30' r='2.4' fill='%23fff'/><circle cx='42' cy='30' r='2.4' fill='%23fff'/><path d='M20 46 Q32 56 44 46' stroke='%23a9742f' stroke-width='4' fill='none' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=ZCOOL+KuaiLe&display=swap">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 <div class="page">
@@ -65,18 +65,60 @@
         <div class="factorySub">
           <button id="btnIntro" class="smallbtn" type="button">游戏背景</button>
           <button id="btnDex" class="smallbtn" type="button">奶蛙图鉴</button>
+          <button id="btnBirthday" class="smallbtn" type="button">奶蛙生日</button>
         </div>
-        <div class="difficultyBar">
-          <button class="diffBtn active" data-diff="easy" type="button">简单</button>
-          <button class="diffBtn" data-diff="medium" type="button">中等</button>
-          <button class="diffBtn" data-diff="hard" type="button">困难</button>
+      </div>
+    </div>
+
+    <div id="ovGameSelect" class="overlay hidden" style="background:rgba(22,11,3,.8);">
+      <div class="card" style="max-width:420px;">
+        <h1 style="margin-top:0;">选择游戏</h1>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;">
+          <button id="btnSelMiner" class="bigbtn" type="button" style="font-size:20px;padding:14px 0;">⛏ 奶蛙矿工</button>
+          <button id="btnSelNinja" class="bigbtn" type="button" style="font-size:20px;padding:14px 0;">🔪 奶蛙忍者</button>
         </div>
+      </div>
+    </div>
+
+    <div id="ovNinja" class="overlay hidden" style="background:rgba(22,11,3,.8);">
+      <div class="card">
+        <h1 style="margin-top:0;">奶蛙忍者</h1>
+        <div class="frogs"><img src="assets/frog-big.webp" style="width:60px;" alt="大奶蛙"><img src="assets/frog-small.webp" style="width:40px;" alt="小奶蛙"></div>
+        <ul class="rules">
+          <li>划动屏幕切开飞来的奶蛙，装进罐头</li>
+          <li>大奶蛙分高，切到会捧腹大笑</li>
+          <li>切到炸弹直接失败！</li>
+          <li>45秒内切越多分越高</li>
+        </ul>
+        <button id="btnNinjaStart" class="bigbtn" type="button">开始切奶蛙</button>
+      </div>
+    </div>
+
+    <div id="ovNinjaEnd" class="overlay hidden" style="background:rgba(22,11,3,.85);z-index:30;">
+      <div class="card" style="text-align:center;">
+        <img id="endCanImg" src="assets/can.webp" style="width:180px;filter:drop-shadow(0 0 30px rgba(255,220,100,.9));" alt="黄桃罐头">
+        <div class="laughBox" id="ninjaLaughBox" style="display:none;"></div>
+        <h2 id="endScoreText" style="color:#ffe14d;margin:14px 0 6px;">得分 0</h2>
+        <p style="color:#ffd98a;margin:0 0 16px;" id="endMsg">罐头做好啦！</p>
+        <button id="btnNinjaRetry" class="bigbtn" type="button">再来一局</button>
+        <button id="btnNinjaExit" class="smallbtn" type="button" style="margin-top:10px;">返回工厂</button>
       </div>
     </div>
 
     <div id="ovIntro" class="introScreen hidden">
       <div id="introContent"></div>
       <div class="introArrow">点击继续 ▶</div>
+    </div>
+
+    <div id="ovBirthday" class="birthdayScreen hidden">
+      <button id="btnBirthdayBack" class="bdayBack" type="button">返回原版游戏</button>
+      <div id="birthdayStory" class="bdayStory"></div>
+      <div class="introArrow">点击继续 ▶</div>
+    </div>
+
+    <div id="ovBirthdayCard" class="bdayCardScreen hidden">
+      <img id="bdayCardImg" src="assets/birthday-card.jpg" alt="奶蛙生日贺图">
+      <button id="btnBdayNext" class="bdayNext hidden" type="button">下一页</button>
     </div>
 
     <div id="ovMenu" class="overlay hidden">
@@ -91,6 +133,18 @@
           <li>空格 / 鼠标 / 手指点按 = 放钩，再按一次 = 提前收钩</li>
         </ul>
         <button id="btnStart" class="bigbtn" type="button">开始挖矿</button>
+      </div>
+    </div>
+
+    <div id="ovDiff" class="overlay hidden" style="background:rgba(22,11,3,.82);z-index:30;">
+      <div class="card" style="max-width:420px;text-align:center;">
+        <h1 style="margin-top:0;">选择难度</h1>
+        <p style="color:#ffd98a;margin:0 0 16px;">难度越高，大奶蛙越难缠</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <button class="bigbtn diffBtn" data-diff="easy" type="button">简单</button>
+          <button class="bigbtn diffBtn" data-diff="medium" type="button">中等</button>
+          <button class="bigbtn diffBtn" data-diff="hard" type="button">困难</button>
+        </div>
       </div>
     </div>
 
@@ -170,10 +224,11 @@
 </div>
 
 <script src="js/vendor/SignalsmithStretch.js"></script>
-<script src="js/data.js?v=2"></script>
-<script src="js/audio.js?v=2"></script>
-<script src="js/game.js?v=2"></script>
-<script src="js/render.js?v=2"></script>
-<script src="js/ui.js?v=2"></script>
+<script src="js/data.js?v=3"></script>
+<script src="js/audio.js?v=3"></script>
+<script src="js/game.js?v=3"></script>
+<script src="js/render.js?v=3"></script>
+<script src="js/ninja.js?v=3"></script>
+<script src="js/ui.js?v=3"></script>
 </body>
 </html>
