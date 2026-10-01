@@ -681,6 +681,7 @@ function updateHUD(){
 }
 
 function update(dt){
+  if(G.scene === 'ninja'){ updateNinja(dt); return; }
   G.shake = Math.max(0, G.shake - dt);
   if(G.laughClock > 0) G.laughClock += dt;
   updateFx(dt);

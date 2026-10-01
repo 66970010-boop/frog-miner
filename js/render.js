@@ -419,6 +419,7 @@ function drawFx(){
 }
 
 function draw(){
+  if(G.scene === 'ninja'){ drawNinja(); return; }
   ctx.save();
   if(G.shake > 0){
     ctx.translate((Math.random() - 0.5) * G.shake * 16, (Math.random() - 0.5) * G.shake * 16);

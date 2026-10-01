@@ -37,7 +37,7 @@ var SND = {
         this.bgmGain.connect(this.ctx.destination);
         this.fxGain.connect(this.ctx.destination);
         this.applyVolumes();
-        this.loadBuffers();
+        if(!IS_LOCAL_FILE){ this.loadBuffers(); }  // 本地走 <audio> 降级，不 fetch
       }catch(e){}
     }
     if(this.ctx && this.ctx.state === 'suspended'){ try{ this.ctx.resume(); }catch(e){} }
@@ -55,9 +55,20 @@ var SND = {
     this._loadingBuf = true;
     var self = this;
     function decode(url){
-      return fetch(url)
-        .then(function(r){ return r.arrayBuffer(); })
-        .then(function(ab){ return self.ctx.decodeAudioData(ab); });
+      // 用 XMLHttpRequest 代替 fetch：本地 file:// 打开时 fetch 会被 CORS 拦截，
+      // 而 XHR 能直接读取同目录本地文件；部署到 http(s) 后 XHR 也照常工作。
+      return new Promise(function(res, rej){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function(){
+          // file:// 下 status 为 0，视为成功；http 下需 200-299
+          if(xhr.status === 0 || (xhr.status >= 200 && xhr.status < 300)){ res(xhr.response); }
+          else { rej(new Error('http ' + xhr.status)); }
+        };
+        xhr.onerror = function(){ rej(new Error('xhr error')); };
+        xhr.send();
+      }).then(function(ab){ return self.ctx.decodeAudioData(ab); });
     }
     decode('assets/bgm.mp3')
       .then(function(buf){ self.bgmBuf = buf; startBgm(); })
@@ -109,7 +120,7 @@ var SND = {
     n.start(t);
   },
   drop: function(){ this.noise(0.18, 0.07, 1100); this.tone(330, 0.22, 'sawtooth', 0.05, 0, -200); },
-  grab: function(){ this.tone(620, 0.07, 'square', 0.1); this.tone(900, 0.1, 'square', 0.1, 0.06); },
+  grab: function(){ this.tone(620, 0.07, 'square', 0.26); this.tone(900, 0.11, 'square', 0.28, 0.06); },
   diamond: function(){ this.tone(1180, 0.09, 'sine', 0.1); this.tone(1570, 0.15, 'sine', 0.08, 0.06); this.tone(2093, 0.2, 'sine', 0.06, 0.12); },
   rock: function(){ this.noise(0.3, 0.28, 160); this.tone(85, 0.26, 'sine', 0.18); },
   coin: function(){ this.tone(880, 0.08, 'square', 0.09); this.tone(1318, 0.17, 'square', 0.09, 0.07); },
@@ -134,9 +145,69 @@ var SND = {
 function applyVolumes(){ SND.applyVolumes(); }
 function saveVol(){ try{ localStorage.setItem('frogVol', JSON.stringify({ bgm: SND.bgmVol, fx: SND.fxVol })); }catch(e){} }
 
+/* 本地 file:// 降级播放器 ------------------------------------------------
+   在本地双击 HTML 打开时，Web Audio 的 fetch/XMLHttpRequest 加载音频都会被
+   浏览器按跨源拦截（CORS），拿不到 AudioBuffer。但 <audio> 元素在 file://
+   下可正常播放本地同目录文件。因此本地打开时切到 <audio> 元素播放文件音频
+   （BGM/笑声/冰块/特殊音效，用 playbackRate 变调），部署到 http(s) 后仍走
+   上方 Web Audio + SignalsmithStretch。对外函数同名，游戏逻辑无需改动。 */
+var IS_LOCAL_FILE = (typeof location !== 'undefined' && location.protocol === 'file:');
+var localAud = {
+  bgm: null, voice: null, voiceLoop: false, bgmOn: false,
+  init: function(){
+    if(!this.bgm){ this.bgm = new Audio('assets/bgm.mp3'); this.bgm.loop = true; }
+    if(!this.voice){ this.voice = new Audio(); }
+  },
+  setVol: function(){
+    if(this.bgm){ try{ this.bgm.volume = SND.bgmVol; }catch(e){} }
+    if(this.voice){ try{ this.voice.volume = SND.fxVol; }catch(e){} }
+  },
+  startBgm: function(){
+    this.init(); this.setVol();
+    if(this.bgmOn) return;
+    try{ this.bgm.play(); }catch(e){}
+    this.bgmOn = true;
+  },
+  stopBgm: function(){
+    if(this.bgm){ try{ this.bgm.pause(); }catch(e){} try{ this.bgm.currentTime = 0; }catch(e){} }
+    this.bgmOn = false;
+  },
+  playLaugh: function(rate){
+    this.init(); this.setVol();
+    this.voice.src = LAUGH_FILES[Math.floor(Math.random() * LAUGH_FILES.length)];
+    this.voice.playbackRate = Math.max(0.8, Math.min(2, rate || 1));
+    this.voice.loop = true; this.voiceLoop = true;
+    try{ this.voice.play(); }catch(e){}
+  },
+  playIce: function(count, rate){
+    this.init(); this.setVol();
+    this.voice.src = ICE_FILES[Math.max(0, Math.min(2, (count | 0) - 1))];
+    this.voice.playbackRate = Math.max(0.8, Math.min(2.5, rate || 1));
+    this.voice.loop = false; this.voiceLoop = false;
+    try{ this.voice.play(); }catch(e){}
+  },
+  finishVoice: function(){
+    if(this.voice){ try{ this.voice.loop = false; }catch(e){} }
+    this.voiceLoop = false;
+  },
+  stopVoice: function(){
+    if(this.voice){ try{ this.voice.pause(); }catch(e){} try{ this.voice.currentTime = 0; }catch(e){} }
+    this.voiceLoop = false;
+  },
+  playSpecial: function(){
+    this.init(); this.setVol();
+    this.voice.src = SPECIAL_FILES[Math.floor(Math.random() * SPECIAL_FILES.length)];
+    this.voice.playbackRate = 1; this.voice.loop = false; this.voiceLoop = false;
+    try{ this.voice.play(); }catch(e){}
+  }
+};
+
 /* 背景音乐：循环 AudioBufferSourceNode --------------------------------- */
 var bgmSource = null, bgmStarted = false;
+var birthdayActive = false; /* 生日页期间禁止游戏 BGM，由 ui.js 置位 */
 function startBgm(){
+  if(birthdayActive) return;
+  if(IS_LOCAL_FILE){ localAud.startBgm(); return; }
   var c = SND.ctx;
   if(bgmStarted || !c || !SND.bgmBuf || !SND.bgmGain) return;
   try{
@@ -255,6 +326,7 @@ function startGrabSound(kind, idx, loop){
 function playLaugh(rate){
   laughRate = Math.max(0.8, Math.min(2, rate || 1));
   laughLoopOn = true;
+  if(IS_LOCAL_FILE){ localAud.playLaugh(laughRate); return; }
   SND.ac();
   startGrabSound('laugh', -1, true);
 }
@@ -262,6 +334,7 @@ function playLaugh(rate){
    冰块声只播一遍。 */
 function playIce(count, rate){
   laughRate = Math.max(0.8, Math.min(2.5, rate || 1));
+  if(IS_LOCAL_FILE){ localAud.playIce(count, laughRate); return; }
   SND.ac();
   startGrabSound('ice', Math.max(0, Math.min(2, (count | 0) - 1)), false);
 }
@@ -271,6 +344,7 @@ function playIce(count, rate){
 function finishGrabSound(){
   laughLoopOn = false;
   grabIntent = null;
+  if(IS_LOCAL_FILE){ localAud.finishVoice(); return; }
   if(grabVoice){
     try{ grabVoice.node.schedule({ output: SND.ctx.currentTime, loopStart: 0, loopEnd: 0 }); }catch(e){}
     grabVoice = null;
@@ -282,13 +356,19 @@ function finishGrabSound(){
 function stopLaugh(){
   laughLoopOn = false;
   grabIntent = null;
+  if(IS_LOCAL_FILE){ localAud.stopVoice(); return; }
   hardStopAll();
 }
 /* 暂停 / 打开面板：暂时停声，保留意图以便恢复 */
-function pauseLaugh(){ hardStopAll(); }
+function pauseLaugh(){ if(IS_LOCAL_FILE){ localAud.stopVoice(); return; } hardStopAll(); }
 /* 恢复游戏：若之前正抓着物件，按原样接着放，直到收上来 */
 function resumeLaugh(){
   if(!laughLoopOn || !grabIntent) return;
+  if(IS_LOCAL_FILE){
+    if(grabIntent.kind === 'ice'){ localAud.playIce(grabIntent.idx + 1, laughRate); }
+    else { localAud.playLaugh(laughRate); }
+    return;
+  }
   startGrabSound(grabIntent.kind, grabIntent.idx, grabIntent.loop);
 }
 
@@ -298,6 +378,7 @@ var specialSource = null, specialPlayed = false;
 function playSpecial(){
   if(specialPlayed) return false;
   var c = SND.ctx;
+  if(IS_LOCAL_FILE){ localAud.playSpecial(); specialPlayed = true; return true; }
   if(!c || !SND.specialBufs || !SND.specialBufs.length) return false;
   var buf = SND.specialBufs[Math.floor(Math.random() * SND.specialBufs.length)];
   if(!buf) return false;

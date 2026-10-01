@@ -118,5 +118,5 @@ var VOL = loadVol();
 var settingsPrevState = 'menu';
 
 function $(id){ return document.getElementById(id); }
-function show(id){ $(id).classList.remove('hidden'); }
-function hide(id){ $(id).classList.add('hidden'); }
+function show(id){ var el = $(id); if(el) el.classList.remove('hidden'); }
+function hide(id){ var el = $(id); if(el) el.classList.add('hidden'); }

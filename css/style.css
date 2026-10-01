@@ -38,8 +38,8 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .frogs img{width:72px;height:auto;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:bob 2.2s ease-in-out infinite;}
 .frogs img:nth-child(2){width:52px;animation-delay:.6s;}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.laughBox{width:162px;height:216px;margin:10px auto 4px;background-image:url('assets/laugh-sheet2.webp');background-size:3240px 216px;animation:laughplay 1.8s steps(20) infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));}
-@keyframes laughplay{from{background-position:0 0}to{background-position:-3240px 0}}
+.laughBox{width:144px;height:192px;margin:10px auto 4px;background-image:url('assets/laugh-sheet2.webp');background-size:2880px 192px;animation:laughplay 1.8s steps(20) infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));}
+@keyframes laughplay{from{background-position:0 0}to{background-position:-2880px 0}}
 .dexGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px auto 6px;max-width:440px;}
 .dexCell{background:rgba(0,0,0,.22);border:2px solid #7a4a21;border-radius:12px;padding:8px 4px 6px;text-align:center;}
 .dexCell img{width:60px;height:60px;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3));}
@@ -79,6 +79,26 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .introScene{font-size:28px;color:#ffe14d;text-align:center;padding:20px;line-height:1.5;max-width:700px;}
 .introArrow{position:absolute;bottom:20px;right:30px;color:#ffe14d;font-size:20px;animation:blink 1s infinite;}
 .introImg{max-width:180px;max-height:160px;margin:10px auto;display:block;}
+.birthdayScreen{position:absolute;inset:0;background:#0b0603;border-radius:0 0 12px 12px;z-index:8;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;}
+.bdayStory{font-size:28px;color:#ffe14d;text-align:center;padding:20px;line-height:1.6;max-width:640px;text-shadow:0 2px 10px rgba(0,0,0,.65);}
+.bdayStory p{animation:bdayFade .7s ease both;}
+.bdayStory .bdayHi{
+  display:inline-block;font-size:42px;letter-spacing:8px;
+  background:linear-gradient(90deg,#fff6c8,#ffd75e,#ffb13d,#ffd75e,#fff6c8);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  animation:shimmer 2.4s linear infinite,floatHi 2.6s ease-in-out infinite;
+  filter:drop-shadow(0 0 16px rgba(255,215,94,.55));
+}
+@keyframes shimmer{to{background-position:200% center}}
+@keyframes floatHi{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes bdayFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.bdayBack{position:absolute;top:16px;right:16px;z-index:4;font-family:inherit;font-size:15px;color:#4a2c0f;background:linear-gradient(180deg,#ffe9a0,#f5a623);border:3px solid #7a4a21;border-radius:12px;padding:8px 16px;cursor:pointer;box-shadow:0 4px 0 #7a4a21;}
+.bdayBack:active{transform:translateY(3px);box-shadow:0 1px 0 #7a4a21;}
+.bdayCardScreen{position:absolute;inset:0;background:#0b0603;z-index:40;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.bdayCardScreen img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.bdayNext{position:absolute;bottom:26px;right:22px;left:auto;transform:none;z-index:2;font-family:inherit;font-size:20px;letter-spacing:6px;color:#4a2c0f;background:linear-gradient(180deg,#ffe14d,#f5a623);border:3px solid #7a4a21;border-radius:14px;padding:12px 34px;cursor:pointer;box-shadow:0 5px 0 #7a4a21;animation:bdayFade .5s ease both;}
+.bdayNext:active{transform:translateY(4px);box-shadow:0 1px 0 #7a4a21;}
 .rareShow{position:absolute;inset:0;background:rgba(0,0,0,.85);border-radius:0 0 12px 12px;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .rareShow .rareImg{width:200px;height:200px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(255,215,94,.8));animation:rarePop .6s cubic-bezier(.2,1.6,.4,1);}
 .rareShow .rareLabel{font-size:32px;color:#ffe14d;margin-top:16px;text-shadow:0 3px 0 #7a4a21;}
@@ -88,8 +108,8 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
   .page{max-width:100%;}
   h1{font-size:22px;}
   .factoryTitle{font-size:26px;letter-spacing:3px;}
-  .factoryOd{height:38%;right:-5%;opacity:.35;}
-  .factoryLeft{left:4%;top:42%;gap:8px;align-items:center;}
+  .factoryOd{height:96%;right:0;opacity:1;}
+  .factoryLeft{left:4%;top:50%;gap:8px;align-items:flex-start;}
   .factoryTitle{font-size:22px !important;letter-spacing:2px !important;margin-bottom:0 !important;}
   .frogBtn{width:100px !important;height:100px !important;}
   .frogBtnLabel{font-size:14px !important;bottom:12% !important;}
@@ -116,6 +136,9 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
   .dexGrid{grid-template-columns:repeat(4,1fr);gap:6px;}
   .dexCell img{width:48px;height:48px;}
   .introScene{font-size:18px;padding:0 12px;}
+  .bdayStory{font-size:20px;padding:0 12px;}
+  .bdayStory .bdayHi{font-size:30px;letter-spacing:5px;}
+  .bdayNext{right:16px;bottom:18px;font-size:16px;letter-spacing:4px;padding:10px 22px;}
   .rareShow .rareImg{width:120px;height:120px;}
   .difficultyBar{gap:4px;}
   .diffBtn{padding:4px 10px;font-size:12px;}
