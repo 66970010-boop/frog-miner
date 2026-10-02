@@ -78,6 +78,8 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .setRow input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#ffd75e;border:3px solid #4a2c0f;box-shadow:0 2px 0 rgba(0,0,0,.4);cursor:pointer;}
 .setRow input[type=range]::-moz-range-track{height:14px;border-radius:8px;background:#3a2410;}
 .hint{text-align:center;font-size:13px;color:#cbb489;margin-top:10px;line-height:1.7;}
+.hint a{color:#ffd75e;text-decoration:underline;text-underline-offset:2px;cursor:pointer;}
+.hint a:hover{color:#fff2a8;}
 .kbd{background:#6b4226;border:1px solid #3a2410;border-bottom-width:3px;border-radius:5px;padding:1px 7px;font-family:inherit;font-size:12px;color:#ffe9b8;}
 .loadingBox{text-align:center;color:#ffe14d;font-size:22px;letter-spacing:4px;}
 .loadingDot{display:inline-block;width:14px;height:14px;border-radius:50%;background:#ffe14d;margin:14px 4px 0;animation:bounce 1s infinite ease-in-out;}
