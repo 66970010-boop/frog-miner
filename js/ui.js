@@ -67,7 +67,11 @@ function startBirthdayStory(){
   var ar = document.querySelector('#ovBirthday .introArrow'); if(ar) ar.style.display = '';
 }
 $('btnBirthday').addEventListener('click', function(){ SND.ac(); SND.click(); showBirthdayCard(); });
- $('btnOfficialQq').addEventListener('click', function(e){
+$('btnOfficialQq').addEventListener('click', function(e){
+  e.preventDefault();
+  SND.ac(); SND.click(); show('ovTeam');
+});
+$('btnOfficialQq2').addEventListener('click', function(e){
   e.preventDefault();
   SND.ac(); SND.click(); show('ovTeam');
 });
