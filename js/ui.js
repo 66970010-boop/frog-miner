@@ -67,6 +67,13 @@ function startBirthdayStory(){
   var ar = document.querySelector('#ovBirthday .introArrow'); if(ar) ar.style.display = '';
 }
 $('btnBirthday').addEventListener('click', function(){ SND.ac(); SND.click(); showBirthdayCard(); });
+$('btnOfficialQq').addEventListener('click', function(){
+  SND.ac(); SND.click(); show('ovTeam');
+});
+$('btnTeamClose').addEventListener('click', function(){ SND.ac(); SND.click(); hide('ovTeam'); });
+$('ovTeam').addEventListener('click', function(e){
+  if(e.target === this){ SND.ac(); SND.click(); hide('ovTeam'); }
+});
 $('btnBirthdayBack').addEventListener('click', function(e){ e.stopPropagation(); SND.ac(); SND.click(); exitBirthday(); hide('ovBirthday'); });
 $('ovBirthday').addEventListener('click', function(e){
   if(e.target && e.target.id === 'btnBirthdayBack') return;
@@ -77,6 +84,7 @@ $('ovBirthday').addEventListener('click', function(e){
   } else {
     document.getElementById('birthdayStory').innerHTML = '<p class="bdayHi">生日快乐，小奶蛙。</p>';
     var ar = document.querySelector('#ovBirthday .introArrow'); if(ar) ar.style.display = 'none';
+    localStorage.setItem('frogMinerBirthdaySeen', '1');
   }
 });
 
@@ -144,7 +152,7 @@ $('btnBdayNext').addEventListener('click', function(){
   show('ovBirthday');
   startBirthdayStory();
 });
-setTimeout(showBirthdayCard, 250);
+if(localStorage.getItem('frogMinerBirthdaySeen') !== '1') setTimeout(showBirthdayCard, 250);
 
 var dexPrevState = 'menu';
 function showDex(){

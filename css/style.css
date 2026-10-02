@@ -34,6 +34,15 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
 .frogBtnLabel{position:absolute;bottom:18%;left:0;right:0;text-align:center;font-size:26px;color:#4a2c0f;letter-spacing:3px;text-shadow:0 2px 0 rgba(255,255,255,.6);font-weight:bold;pointer-events:none;}
 @keyframes floatFrog{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .factorySub{display:flex;gap:10px;margin-top:6px;}
+.qqGroupBtn{position:absolute;left:4%;bottom:4%;z-index:4;font-family:inherit;font-size:15px;color:#ffe9b8;background:rgba(58,36,16,.9);border:2px solid #a06810;border-radius:8px;padding:7px 14px;cursor:pointer;box-shadow:0 3px 0 #3a2410;transition:transform .06s,background .15s;}
+.qqGroupBtn:hover{background:rgba(122,74,33,.95);}
+.qqGroupBtn:active{transform:translateY(2px);box-shadow:0 1px 0 #3a2410;}
+.teamCard{width:420px;text-align:left;}
+.teamSection{margin-top:14px;padding:10px 14px;background:rgba(58,36,16,.35);border:2px solid #7a4a21;border-radius:10px;line-height:1.65;}
+.teamSection h2{font-size:18px;color:#ffe14d;margin-bottom:4px;}
+.teamSection p{font-size:15px;color:#ffefc9;}
+.teamSection a{color:#ffd75e;text-decoration:underline;}
+.teamQq{text-align:center;color:#ffe14d;font-size:18px;margin:16px 0 4px;}
 .frogs{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin:10px 0 6px;}
 .frogs img{width:72px;height:auto;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:bob 2.2s ease-in-out infinite;}
 .frogs img:nth-child(2){width:52px;animation-delay:.6s;}
@@ -114,6 +123,10 @@ h1{font-size:34px;color:#ffe14d;text-shadow:0 3px 0 #7a4a21,0 7px 0 rgba(0,0,0,.
   .frogBtn{width:100px !important;height:100px !important;}
   .frogBtnLabel{font-size:14px !important;bottom:12% !important;}
   .factorySub{gap:4px;}
+  .qqGroupBtn{left:4%;bottom:3%;font-size:11px;padding:4px 8px;}
+  .teamCard{width:92%;padding:16px 14px;}
+  .teamSection{padding:8px 10px;}
+  .teamSection p{font-size:13px;}
   .smallbtn{font-size:11px;padding:3px 8px;}
   .difficultyBar{margin-top:2px;}
   .diffBtn{padding:3px 8px;font-size:11px;}
